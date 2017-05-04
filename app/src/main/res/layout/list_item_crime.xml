@@ -4,29 +4,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <CheckBox
+    <TextView
         android:id="@+id/list_item_crime_solved_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:padding="4dp"/>
+        android:padding="8dp"
+        android:textSize="17dp"
+        android:text="0 - 0 - 0"/>
 
+    <!--Text subject to change-->
     <TextView
-        android:id="@+id/list_item_crime_title_text_view"
-        android:layout_width="match_parent"
+        android:id="@+id/team_rank_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="30dp"
+        android:padding="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/team_identifier_linear_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/list_item_crime_solved_check_box"
-        android:textStyle="bold"
-        android:padding="4dp"
-        tools:text="Crime Title"/>
+        android:layout_toRightOf="@id/team_rank_text_view"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/list_item_crime_date_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/list_item_crime_solved_check_box"
-        android:layout_below="@id/list_item_crime_title_text_view"
-        android:padding="4dp"
-        tools:text="Crime Date"/>
+        <TextView
+            android:id="@+id/list_item_crime_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:padding="4dp"
+            tools:text="Team Name"/>
+
+        <TextView
+            android:id="@+id/list_item_crime_date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            tools:text="Team Number"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
