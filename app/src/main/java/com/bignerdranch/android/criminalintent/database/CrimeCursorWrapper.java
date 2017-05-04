@@ -29,7 +29,7 @@ public class CrimeCursorWrapper extends CursorWrapper {
         String wins = getString(getColumnIndex(CrimeTable.Cols.WINS));
         String losses = getString(getColumnIndex(CrimeTable.Cols.LOSSES));
         String ties = getString(getColumnIndex(CrimeTable.Cols.TIES));
-        int disquals = getInt(getColumnIndex(CrimeTable.Cols.SOLVED));
+        int disquals = getInt(getColumnIndex(CrimeTable.Cols.DISQUALS));
 
         Crime crime = new Crime(UUID.fromString(uuidString));
         crime.setTitle(title);

@@ -37,6 +37,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -63,7 +64,8 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckbox;
+//    private CheckBox mSolvedCheckBox;
+    private TextView mDisquals;
     private Button mReportButton;
     private Button mSuspectButton;
     private ImageButton mPhotoButton;
@@ -279,9 +281,15 @@ public class CrimeFragment extends Fragment {
                 {
                     mSubtractButton.setEnabled(true);
                 }
+                updateDisquals();
+                updateCrime();
                 Log.i(TAG, "Added one: " + mCrime.getDisquals());
             }
         });
+
+        mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
+        Log.i(TAG, "Firt Pass: " + mCrime.getDisquals());
+        updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
         mSubtractButton.setOnClickListener(new View.OnClickListener() {
@@ -295,6 +303,8 @@ public class CrimeFragment extends Fragment {
                     mCrime.setDisquals(0);
                     mSubtractButton.setEnabled(false);
                 }
+                updateDisquals();
+                updateCrime();
                 Log.i(TAG, "Subtracted one: " + mCrime.getDisquals());
             }
         });
@@ -456,6 +466,11 @@ public class CrimeFragment extends Fragment {
 
     private void updateDate() {
         mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
+    }
+
+    private void updateDisquals()
+    {
+        mDisquals.setText(getString(R.string.disquals_text, "" + mCrime.getDisquals()));
     }
 
     private String getCrimeReport()

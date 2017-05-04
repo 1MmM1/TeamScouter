@@ -41,4 +41,7 @@
         <item>Offensive</item>
         <item>Defensive</item>
     </string-array>
+
+    <string name="disquals_title">Number of Disqualifications"</string>
+    <string name="disquals_text">%1$s</string>
 </resources>
