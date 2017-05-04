@@ -9,24 +9,180 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crime_details_label"
+        android:text="Criteria"
         style="?android:listSeparatorTextViewStyle"/>
 
-    <Button
-        android:id="@+id/crime_date"
+    // Wins - Losses - Ties
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Wins:"
+            android:textSize="17dp"/>
+
+        <EditText
+            android:id="@+id/wins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="       " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Losses:"
+            android:textSize="17dp"/>
+
+        <EditText
+            android:id="@+id/losses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="       "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ties:"
+            android:textSize="17dp"/>
+
+        <EditText
+            android:id="@+id/ties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="       "/>
+    </LinearLayout>
+
+    //Type of Robots
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:paddingBottom="16dp"
+        android:paddingTop="10dp">
 
-    <CheckBox
-        android:id="@+id/crime_solved"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type of Robot"
+            android:textSize="17dp"
+            android:paddingLeft="20dp" />
+
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp">
+        </Spinner>
+    </LinearLayout>
+
+    // Hang
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/crime_solved_label"/>
+        android:text="Hang"
+        android:textSize="17dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="8dp"/>
 
+    <SeekBar
+        android:id="@+id/hang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="2"/>
+
+
+    // Can it Throw Cubes?
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Can It Throw Cubes?"
+            android:textSize="17dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+
+        <CheckBox
+            android:id="@+id/crime_solved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        //need to change the text in the textview
+        <TextView
+            android:id="@+id/disqualification_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Disqualifications"
+            android:textSize="17dp"
+            android:paddingLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="10dp"/>
+
+        <ImageButton
+            android:id="@+id/add_disquals_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_action_add_blue"/>
+
+        <TextView
+            android:id="@+id/total_disquals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="1"
+            android:padding="10dp"/>
+
+        <ImageButton
+            android:id="@+id/subtract_disquals_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_action_remove"/>
+
+    </LinearLayout>
+
+    // Last Date Played
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Last Date Played"
+           android:textSize="17dp"
+           android:paddingLeft="20dp"
+           android:paddingTop="16dp"/>
+       <Button
+            android:id="@+id/crime_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+   </LinearLayout>
+
+
+    // Choose contact
     <Button
         android:id="@+id/crime_suspect"
         android:layout_width="match_parent"
@@ -35,6 +191,7 @@
         android:layout_marginRight="16dp"
         android:text="@string/crime_suspect_text"/>
 
+    // Send report
     <Button
         android:id="@+id/crime_report"
         android:layout_width="match_parent"
