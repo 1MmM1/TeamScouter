@@ -122,6 +122,8 @@ public class CrimeLab {
         values.put(CrimeTable.Cols.TIES, crime.getTies());
         values.put(CrimeTable.Cols.LOSSES, crime.getLosses());
         values.put(CrimeTable.Cols.DISQUALS, crime.getDisquals());
+        values.put(CrimeTable.Cols.TYPE, crime.getType());
+        values.put(CrimeTable.Cols.HANG, crime.getHang());
         return(values);
     }
 

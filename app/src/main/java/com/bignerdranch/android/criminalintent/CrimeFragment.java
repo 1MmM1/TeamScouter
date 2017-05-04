@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -44,7 +45,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment {
+public class CrimeFragment extends Fragment implements
+        AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "CrimeFragment";
 
@@ -364,7 +366,10 @@ public class CrimeFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.types_of_robot, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+                spinner.setAdapter(adapter);
+                spinner.setOnItemSelectedListener(this);
+                spinner.setSelection(mCrime.getType());
+        Log.i(TAG, "spinner change:" + spinner.getSelectedItem().toString());
 
         return v;
     }
@@ -422,6 +427,17 @@ public class CrimeFragment extends Fragment {
             CrimeLab.get(getActivity()).deleteCrime(mCrime);
             getActivity().finish();
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        mCrime.setType(position);
+        updateCrime();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.widget.Spinner;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,12 +13,13 @@ public class Crime {
     private boolean mSolved;
     private String mSuspect;
     private String results;
-    private String type;
+    private int mType;
     private String number;
     private String mWins;
     private String mLosses;
     private String mTies;
     private int mDisquals;
+    private int mHang;
 
     public Crime() {
         this(UUID.randomUUID());
@@ -32,9 +35,9 @@ public class Crime {
 
     public String getNumber() {return number;}
 
-    public void setType(String robotType) {type = robotType;}
+    public void setType(int robotType) {mType = robotType;}
 
-    public String getType() {return type;}
+    public int getType() {return mType;}
 
     public UUID getId() {
         return mId;
@@ -107,5 +110,13 @@ public class Crime {
 
     public void setDisquals(int disquals) {
         mDisquals = disquals;
+    }
+
+    public void setHang(int hang) {
+        mHang = hang;
+    }
+
+    public int getHang() {
+        return mHang;
     }
 }
