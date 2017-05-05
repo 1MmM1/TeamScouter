@@ -12,16 +12,19 @@
         android:text="Criteria"
         style="?android:listSeparatorTextViewStyle"/>
 
-    // Wins - Losses - Ties
+    // Wins - Ties - Losses
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
+        <!--We should consider adding hints to the EditText instead of space-->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingTop="5dp"
             android:text="Wins:"
             android:textSize="17dp"/>
 
@@ -35,11 +38,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Losses:"
+            android:paddingTop="5dp"
+            android:text="Ties:"
             android:textSize="17dp"/>
 
         <EditText
-            android:id="@+id/losses"
+            android:id="@+id/ties"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
@@ -48,11 +52,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Ties:"
+            android:paddingTop="5dp"
+            android:text="Losses:"
             android:textSize="17dp"/>
 
         <EditText
-            android:id="@+id/ties"
+            android:id="@+id/losses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"

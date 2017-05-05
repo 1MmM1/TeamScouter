@@ -29,6 +29,9 @@ public class Crime {
     {
         mId = id;
         mDate = new Date();
+        mWins = "0";
+        mTies = "0";
+        mLosses = "0";
     }
 
     public void setNumber(String num) {number = num;}
