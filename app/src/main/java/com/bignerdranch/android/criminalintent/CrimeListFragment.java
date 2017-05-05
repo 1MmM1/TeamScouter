@@ -190,6 +190,7 @@ public class CrimeListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private TextView mWinLossTie;
 //        private CheckBox mSolvedCheckBox;
 
         private Crime mCrime;
@@ -200,6 +201,7 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
+            mWinLossTie = (TextView) itemView.findViewById(R.id.list_item_win_loss_tie_text_view);
             // The checkbox was changed to a text view so we still have to write the code for that
 //            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
 //            mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -215,6 +217,7 @@ public class CrimeListFragment extends Fragment {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getNumber());
+            mWinLossTie.setText(getString(R.string.win_loss_ties, mCrime.getWins(), mCrime.getTies(), mCrime.getLosses()));
                     //android.text.format.DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
 //            mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
