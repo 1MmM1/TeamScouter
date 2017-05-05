@@ -44,6 +44,7 @@ public class HangFragment extends DialogFragment {
         mHangBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                Toast.makeText(getActivity(), Crime.hangingTypes.get(progress), Toast.LENGTH_SHORT).show();
             }
 
             @Override
