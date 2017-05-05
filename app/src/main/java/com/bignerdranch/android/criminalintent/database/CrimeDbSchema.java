@@ -19,6 +19,8 @@ public class CrimeDbSchema {
             public static final String LOSSES = "losses";
             public static final String TIES = "ties";
             public static final String DISQUALS = "disquals";
+            public static final String TYPE = "type";
+            public static final String HANG = "hang";
         }
     }
 }

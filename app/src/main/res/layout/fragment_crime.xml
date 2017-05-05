@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type of Robot"
+            android:text="@string/robot_type_label"
             android:textSize="17dp"
             android:paddingLeft="20dp" />
 
@@ -131,7 +131,7 @@
             android:id="@+id/disqualification_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of Disqualifications"
+            android:text="@string/disquals_title"
             android:textSize="17dp"
             android:paddingLeft="20dp"
             android:layout_gravity="center_vertical"
@@ -145,11 +145,11 @@
             android:src="@drawable/ic_action_add_blue"/>
 
         <TextView
-            android:id="@+id/total_disquals"
+            android:id="@+id/total_disquals_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="1"
+            android:text="@string/disquals_text"
             android:padding="10dp"/>
 
         <ImageButton

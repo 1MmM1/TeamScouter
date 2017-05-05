@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,6 +38,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -44,7 +46,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment {
+public class CrimeFragment extends Fragment implements
+        AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "CrimeFragment";
 
@@ -63,7 +66,8 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckbox;
+//    private CheckBox mSolvedCheckBox;
+    private TextView mDisquals;
     private Button mReportButton;
     private Button mSuspectButton;
     private ImageButton mPhotoButton;
@@ -279,9 +283,15 @@ public class CrimeFragment extends Fragment {
                 {
                     mSubtractButton.setEnabled(true);
                 }
+                updateDisquals();
+                updateCrime();
                 Log.i(TAG, "Added one: " + mCrime.getDisquals());
             }
         });
+
+        mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
+        Log.i(TAG, "Firt Pass: " + mCrime.getDisquals());
+        updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
         mSubtractButton.setOnClickListener(new View.OnClickListener() {
@@ -295,6 +305,8 @@ public class CrimeFragment extends Fragment {
                     mCrime.setDisquals(0);
                     mSubtractButton.setEnabled(false);
                 }
+                updateDisquals();
+                updateCrime();
                 Log.i(TAG, "Subtracted one: " + mCrime.getDisquals());
             }
         });
@@ -364,7 +376,10 @@ public class CrimeFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.types_of_robot, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+                spinner.setAdapter(adapter);
+                spinner.setOnItemSelectedListener(this);
+                spinner.setSelection(mCrime.getType());
+        Log.i(TAG, "spinner change:" + spinner.getSelectedItem().toString());
 
         return v;
     }
@@ -426,6 +441,17 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        mCrime.setType(position);
+        updateCrime();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
@@ -456,6 +482,11 @@ public class CrimeFragment extends Fragment {
 
     private void updateDate() {
         mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
+    }
+
+    private void updateDisquals()
+    {
+        mDisquals.setText(getString(R.string.disquals_text, "" + mCrime.getDisquals()));
     }
 
     private String getCrimeReport()
