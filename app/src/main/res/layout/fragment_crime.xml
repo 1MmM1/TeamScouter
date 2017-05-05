@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Criteria"
+        android:text="@string/criteria_title"
         style="?android:listSeparatorTextViewStyle"/>
 
     // Wins - Ties - Losses
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="5dp"
-            android:text="Wins:"
+            android:text="@string/wins_title"
             android:textSize="17dp"/>
 
         <EditText
@@ -33,13 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:text="       " />
+            android:text="@string/win_tie_loss_edit_text_spacing" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="5dp"
-            android:text="Ties:"
+            android:text="@string/ties_title"
             android:textSize="17dp"/>
 
         <EditText
@@ -47,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:text="       "/>
+            android:text="@string/win_tie_loss_edit_text_spacing"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="5dp"
-            android:text="Losses:"
+            android:text="@string/losses_title"
             android:textSize="17dp"/>
 
         <EditText
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:text="       "/>
+            android:text="@string/win_tie_loss_edit_text_spacing"/>
     </LinearLayout>
 
     //Type of Robots
@@ -86,24 +86,32 @@
         </Spinner>
     </LinearLayout>
 
-    // Hang
-    <TextView
+    <!--Hang-->
+    <Button
+        android:id="@+id/hang_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hang"
-        android:textSize="17dp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="8dp"/>
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/hang_text" />
+    <!--// Hang-->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Hang"-->
+        <!--android:textSize="17dp"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingBottom="8dp"/>-->
 
-    <SeekBar
-        android:id="@+id/hang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:max="2"/>
+    <!--<SeekBar-->
+        <!--android:id="@+id/hang"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+        <!--android:max="2"/>-->
 
 
-    // Can it Throw Cubes?
+    <!-- Can it Throw Cubes?-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
