@@ -66,7 +66,7 @@ public class CrimeFragment extends Fragment implements
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-//    private CheckBox mSolvedCheckBox;
+    private CheckBox mSolvedCheckbox;
     private TextView mDisquals;
     private Button mReportButton;
     private Button mSuspectButton;
@@ -78,7 +78,8 @@ public class CrimeFragment extends Fragment implements
     private EditText mWins;
     private EditText mLosses;
     private EditText mTies;
-    private Spinner mType;
+    private Spinner mTypeSpinner;
+    private Button mHangButton;
     private ImageButton mPlusButton;
     private ImageButton mSubtractButton;
 //    private SeekBar mHanging;
@@ -187,15 +188,15 @@ public class CrimeFragment extends Fragment implements
         });
 
 
-//        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
-//        mSolvedCheckbox.setChecked(mCrime.isSolved());
-//        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                mCrime.setSolved(isChecked);
-//                updateCrime();
-//            }
-//        });
+        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mSolvedCheckbox.setChecked(mCrime.isSolved());
+        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mCrime.setSolved(isChecked);
+                updateCrime();
+            }
+        });
 
         mReportButton = (Button) v.findViewById(R.id.crime_report);
         mReportButton.setOnClickListener(new View.OnClickListener() {
@@ -372,14 +373,24 @@ public class CrimeFragment extends Fragment implements
             }
         });
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.type_spinner);
+        mTypeSpinner = (Spinner) v.findViewById(R.id.type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.types_of_robot, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                spinner.setOnItemSelectedListener(this);
-                spinner.setSelection(mCrime.getType());
-        Log.i(TAG, "spinner change:" + spinner.getSelectedItem().toString());
+                mTypeSpinner.setAdapter(adapter);
+                mTypeSpinner.setOnItemSelectedListener(this);
+                mTypeSpinner.setSelection(mCrime.getType());
+        Log.i(TAG, "spinner change:" + mTypeSpinner.getSelectedItem().toString());
+
+        mHangButton = (Button) v.findViewById(R.id.hang_button);
+        updateHanging();
+        mHangButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
 
         return v;
     }
@@ -487,6 +498,11 @@ public class CrimeFragment extends Fragment implements
     private void updateDisquals()
     {
         mDisquals.setText(getString(R.string.disquals_text, "" + mCrime.getDisquals()));
+    }
+
+    private void updateHanging()
+    {
+        mHangButton.setText(getString(R.string.hang_text, mCrime.getHangString()));
     }
 
     private String getCrimeReport()

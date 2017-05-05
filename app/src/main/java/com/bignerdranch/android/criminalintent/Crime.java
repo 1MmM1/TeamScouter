@@ -2,7 +2,9 @@ package com.bignerdranch.android.criminalintent;
 
 import android.widget.Spinner;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class Crime {
@@ -21,6 +23,8 @@ public class Crime {
     private int mDisquals;
     private int mHang;
 
+    private List<String> hangingTypes = Arrays.asList("No", "Low", "High");
+
     public Crime() {
         this(UUID.randomUUID());
     }
@@ -29,6 +33,9 @@ public class Crime {
     {
         mId = id;
         mDate = new Date();
+        mWins = "0";
+        mTies = "0";
+        mLosses = "0";
     }
 
     public void setNumber(String num) {number = num;}
@@ -118,5 +125,10 @@ public class Crime {
 
     public int getHang() {
         return mHang;
+    }
+
+    public String getHangString()
+    {
+        return(hangingTypes.get(mHang));
     }
 }

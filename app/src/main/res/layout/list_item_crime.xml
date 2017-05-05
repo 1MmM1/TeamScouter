@@ -5,13 +5,13 @@
                 android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/list_item_crime_solved_check_box"
+        android:id="@+id/list_item_win_loss_tie_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:padding="8dp"
         android:textSize="17dp"
-        android:text="0 - 0 - 0"/>
+        android:text="@string/win_loss_ties"/>
 
     <!--Text subject to change-->
     <TextView
@@ -27,7 +27,7 @@
         android:id="@+id/team_identifier_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/list_item_crime_solved_check_box"
+        android:layout_toLeftOf="@id/list_item_win_loss_tie_text_view"
         android:layout_toRightOf="@id/team_rank_text_view"
         android:orientation="vertical">
 

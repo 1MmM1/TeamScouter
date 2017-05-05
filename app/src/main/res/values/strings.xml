@@ -44,4 +44,11 @@
 
     <string name="disquals_title">Number of Disqualifications"</string>
     <string name="disquals_text">%1$s</string>
+    <string name="win_loss_ties">%1$s - %2$s - %3$s</string>
+    <string name="criteria_title">Criteria</string>
+    <string name="hang_text">Hang: %1$s</string>
+    <string name="wins_title">Wins:</string>
+    <string name="ties_title">Ties:</string>
+    <string name="losses_title">Losses:</string>
+    <string name="win_tie_loss_edit_text_spacing">       </string>
 </resources>
