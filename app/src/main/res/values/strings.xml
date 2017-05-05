@@ -21,15 +21,15 @@
     <string name="no_crimes_hint">There are no teams</string>
     <string name="delete_confirmation_title">Warning!</string>
     <string name="delete_confirmation">Do you really want to delete this team?</string>
-    <string name="crime_suspect_text">Choose Coach</string>
-    <string name="crime_report_text">Send Coach a Report</string>
+    <string name="crime_suspect_text">Choose Coach Contact</string>
+    <string name="crime_report_text">Send Contact a Report</string>
 
 
     <string name="crime_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>
-    <string name="crime_report_solved">The team is solved</string>
-    <string name="crime_report_unsolved">The team is not solved</string>
-    <string name="crime_report_no_suspect">there is no suspect.</string>
-    <string name="crime_report_suspect">the suspect is %s.</string>
+    <string name="crime_report_solved">The team can throw cubes</string>
+    <string name="crime_report_unsolved">The team can not throw cubes</string>
+    <string name="crime_report_no_suspect">there is no specified coach.</string>
+    <string name="crime_report_suspect">the coach is %s.</string>
     <string name="crime_report_subject">TeamScouter Team Report</string>
     <string name="send_report">Send team report via</string>
     <string name="photo_zoom_title">Close Up View</string>
@@ -46,6 +46,7 @@
     <string name="disquals_text">%1$s</string>
     <string name="win_loss_ties">%1$s - %2$s - %3$s</string>
     <string name="criteria_title">Criteria</string>
+    <string name="hang_title">Hanging</string>
     <string name="hang_text">Hang: %1$s</string>
     <string name="wins_title">Wins:</string>
     <string name="ties_title">Ties:</string>
