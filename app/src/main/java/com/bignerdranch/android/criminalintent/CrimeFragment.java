@@ -66,7 +66,7 @@ public class CrimeFragment extends Fragment implements
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-//    private CheckBox mSolvedCheckBox;
+    private CheckBox mSolvedCheckbox;
     private TextView mDisquals;
     private Button mReportButton;
     private Button mSuspectButton;
@@ -188,15 +188,15 @@ public class CrimeFragment extends Fragment implements
         });
 
 
-//        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
-//        mSolvedCheckbox.setChecked(mCrime.isSolved());
-//        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                mCrime.setSolved(isChecked);
-//                updateCrime();
-//            }
-//        });
+        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mSolvedCheckbox.setChecked(mCrime.isSolved());
+        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mCrime.setSolved(isChecked);
+                updateCrime();
+            }
+        });
 
         mReportButton = (Button) v.findViewById(R.id.crime_report);
         mReportButton.setOnClickListener(new View.OnClickListener() {
