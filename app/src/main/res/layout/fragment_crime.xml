@@ -94,22 +94,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/hang_text" />
-    <!--// Hang-->
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Hang"-->
-        <!--android:textSize="17dp"-->
-        <!--android:paddingLeft="20dp"-->
-        <!--android:paddingBottom="8dp"/>-->
-
-    <!--<SeekBar-->
-        <!--android:id="@+id/hang"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-        <!--android:max="2"/>-->
-
 
     <!-- Can it Throw Cubes?-->
     <LinearLayout
