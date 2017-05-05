@@ -23,7 +23,7 @@ public class Crime {
     private int mDisquals;
     private int mHang;
 
-    private List<String> hangingTypes = Arrays.asList("No", "Low", "High");
+    public static final List<String> hangingTypes = Arrays.asList("None", "Low", "High");
 
     public Crime() {
         this(UUID.randomUUID());

@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -40,6 +41,21 @@ public class HangFragment extends DialogFragment {
         final int position = getArguments().getInt(ARG_POSITION);
         mHangBar = (SeekBar) v.findViewById(R.id.hang_seek_bar);
         mHangBar.setProgress(position);
+        mHangBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         return (new AlertDialog.Builder(getActivity()).setView(v).setTitle(R.string.hang_title)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -56,6 +72,7 @@ public class HangFragment extends DialogFragment {
                     }
                 }).create());
     }
+
     private void sendResult(int resultCode, int pos)
     {
         if(getTargetFragment() == null)
