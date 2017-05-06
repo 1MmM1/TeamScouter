@@ -7,7 +7,6 @@
     <string name="crime_title_label">Team Number</string>
     <string name="team_name_label">Team Name</string>
     <string name="crime_details_label">Details</string>
-    <string name="crime_solved_label">Can They Throw Cubes?</string>
     <string name="robot_type_label">Type of Robot</string>
     <string name="date_picker_title">Last Date Played:</string>
     <string name="new_crime">New Team</string>
@@ -47,6 +46,7 @@
     <string name="disquals_text">%1$s</string>
     <string name="win_loss_ties">%1$s - %2$s - %3$s</string>
     <string name="criteria_title">Criteria</string>
+    <string name="cube_checkbox_text">Can It Throw Cubes?</string>
     <string name="hang_title">Hanging</string>
     <string name="hang_text">Hang: %1$s</string>
     <string name="wins_title">Wins:</string>
