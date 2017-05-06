@@ -21,8 +21,9 @@
     <string name="no_crimes_hint">There are no teams</string>
     <string name="delete_confirmation_title">Warning!</string>
     <string name="delete_confirmation">Do you really want to delete this team?</string>
-    <string name="crime_suspect_text">Choose Coach Contact</string>
-    <string name="crime_report_text">Send Contact a Report</string>
+    <string name="crime_suspect_text">Choose Team Coach</string>
+    <string name="call_coach_text">Call Team Coach</string>
+    <string name="crime_report_text">Send Coach a Report</string>
 
 
     <string name="crime_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>

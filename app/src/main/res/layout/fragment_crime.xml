@@ -183,7 +183,7 @@
    </LinearLayout>
 
 
-    // Choose contact
+    <!--Choose contact-->
     <Button
         android:id="@+id/crime_suspect"
         android:layout_width="match_parent"
@@ -192,7 +192,15 @@
         android:layout_marginRight="16dp"
         android:text="@string/crime_suspect_text"/>
 
-    // Send report
+    <Button
+        android:id="@+id/call_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/call_coach_text"/>
+
+    <!--Send report-->
     <Button
         android:id="@+id/crime_report"
         android:layout_width="match_parent"
