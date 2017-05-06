@@ -55,11 +55,13 @@ public class CrimeFragment extends Fragment implements
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_DELETE = "DialogDelete";
     private static final String DIALOG_PICTURE = "DialogPicture";
+    private static final String DIALOG_HANG = "DialogHang";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_DELETE = 100;
     private static final int REQUEST_CONTACT = 1;
     private static final int REQUEST_PHOTO = 2;
     private static final int REQUEST_ZOOM = 200;
+    private static final int REQUEST_HANG = 300;
 
     private Crime mCrime;
     private File mPhotoFile;
@@ -183,8 +185,7 @@ public class CrimeFragment extends Fragment implements
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
                 dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
-                mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
-            }
+                updateDate();            }
         });
 
 
@@ -388,7 +389,11 @@ public class CrimeFragment extends Fragment implements
             @Override
             public void onClick(View v)
             {
-
+                FragmentManager manager = getFragmentManager();
+                HangFragment dialog = HangFragment.newInstance(mCrime.getHang());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_HANG);
+                dialog.show(manager, DIALOG_HANG);
+                updateHanging();
             }
         });
 
@@ -447,6 +452,13 @@ public class CrimeFragment extends Fragment implements
             //should this be changed as well, seeing as we can no longer exit the activity?
             CrimeLab.get(getActivity()).deleteCrime(mCrime);
             getActivity().finish();
+        }
+
+        if(requestCode == REQUEST_HANG)
+        {
+            mCrime.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
+            updateCrime();
+            updateHanging();
         }
 
     }
