@@ -1,59 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <include layout="@layout/view_camera_and_title"></include>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/crime_details_label"
-        style="?android:listSeparatorTextViewStyle"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/crime_date"
+        <include layout="@layout/view_camera_and_title"></include>
+
+        <TextView
+            android:id="@+id/textView"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/criteria_title"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
-        <CheckBox
-            android:id="@+id/crime_solved"
-            android:layout_width="wrap_content"
+            <!--We should consider adding hints to the EditText instead of space-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/wins_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/wins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:text="@string/win_tie_loss_edit_text_spacing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/ties_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/ties"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:text="@string/win_tie_loss_edit_text_spacing"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/losses_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/losses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:text="@string/win_tie_loss_edit_text_spacing"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/crime_solved_label"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/robot_type_label"
+                android:textSize="17dp"
+                android:paddingRight="20dp"/>
+
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cube_checkbox_text"
+                android:textSize="17dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/crime_solved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <!--Hang-->
+            <Button
+                android:id="@+id/hang_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                android:text="@string/hang_text"/>
+
+            <!--Disqualifications-->
+            <TextView
+                android:id="@+id/disqualification_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disquals_title"
+                android:textSize="17dp"
+                android:paddingLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10dp"/>
+
+            <ImageButton
+                android:id="@+id/add_disquals_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_add_blue"/>
+
+            <TextView
+                android:id="@+id/total_disquals_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/disquals_text"
+                android:padding="10dp"/>
+
+            <ImageButton
+                android:id="@+id/subtract_disquals_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_remove"/>
+
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/crime_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"/>
+
+            <Button
+                android:id="@+id/crime_report"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/crime_report_text"/>
+
+            <Button
+                android:id="@+id/crime_suspect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/crime_suspect_text"/>
+
+            <Button
+                android:id="@+id/call_contact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/call_coach_text"/>
+
+        </GridLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-
-        <Button
-            android:id="@+id/crime_suspect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/crime_suspect_text"/>
-
-        <Button
-            android:id="@+id/crime_report"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/crime_report_text"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

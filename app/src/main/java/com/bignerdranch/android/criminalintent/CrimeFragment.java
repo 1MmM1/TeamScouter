@@ -10,12 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.support.annotation.BoolRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.pm.ActivityInfoCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -32,17 +29,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Date;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.util.UUID;
 
@@ -72,6 +66,7 @@ public class CrimeFragment extends Fragment implements
     private TextView mDisquals;
     private Button mReportButton;
     private Button mSuspectButton;
+    private Button mCallButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private Point mPhotoViewSize;
@@ -85,6 +80,8 @@ public class CrimeFragment extends Fragment implements
     private ImageButton mPlusButton;
     private ImageButton mSubtractButton;
 //    private SeekBar mHanging;
+
+    private int teamId;
 
     public interface Callbacks
     {
@@ -224,10 +221,43 @@ public class CrimeFragment extends Fragment implements
             mSuspectButton.setText(mCrime.getSuspect());
         }
 
+        mCallButton = (Button) v.findViewById(R.id.call_contact);
+        mCallButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Uri phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+                String[] fields = new String[] {ContactsContract.CommonDataKinds.Phone.NUMBER};
+                String whereClause = ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?";
+                String[] args = new String[] {Integer.toString(teamId)};
+                Cursor c = getActivity().getContentResolver().query(phoneUri, fields, whereClause, args, null);
+
+                try
+                {
+                    if(c.getCount() == 0)
+                    {
+                        return;
+                    }
+                    c.moveToFirst();
+                    String suspectNumber = c.getString(0);
+                    Uri number = Uri.parse("tel:" + suspectNumber);
+                    Intent i = new Intent(Intent.ACTION_DIAL, number);
+                    startActivity(i);
+                }
+                finally
+                {
+                    c.close();
+                }
+            }
+        });
+
         PackageManager packageManager = getActivity().getPackageManager();
         if(packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null)
         {
             mSuspectButton.setEnabled(false);
+        }
+        if(mCrime.getSuspect() == null)
+        {
+            mCallButton.setEnabled(false);
         }
 
         mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
@@ -421,7 +451,7 @@ public class CrimeFragment extends Fragment implements
         else if(requestCode == REQUEST_CONTACT && data != null)
         {
             Uri contactUri = data.getData();
-            String[] queryFields = new String[] {ContactsContract.Contacts.DISPLAY_NAME};
+            String[] queryFields = new String[] {ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts._ID};
             Cursor c = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
 
             try
@@ -435,6 +465,8 @@ public class CrimeFragment extends Fragment implements
                 mCrime.setSuspect(suspect);
                 updateCrime();
                 mSuspectButton.setText(suspect);
+                mCallButton.setEnabled(true);
+                teamId = c.getInt(1);
             }
             finally
             {

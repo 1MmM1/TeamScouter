@@ -16,7 +16,7 @@
         android:text="@string/criteria_title"
         style="?android:listSeparatorTextViewStyle"/>
 
-    // Wins - Ties - Losses
+    <!--Wins - Ties - Losses-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:text="@string/win_tie_loss_edit_text_spacing"/>
     </LinearLayout>
 
-    //Type of Robots
+    <!--Type of Robots-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Can It Throw Cubes?"
+            android:text="@string/cube_checkbox_text"
             android:textSize="17dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"/>
@@ -127,7 +127,6 @@
         android:orientation="horizontal"
         android:paddingTop="8dp">
 
-        //need to change the text in the textview
         <TextView
             android:id="@+id/disqualification_text_view"
             android:layout_width="wrap_content"
@@ -162,7 +161,7 @@
 
     </LinearLayout>
 
-    // Last Date Played
+    <!--Last Date Played-->
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -183,7 +182,7 @@
    </LinearLayout>
 
 
-    // Choose contact
+    <!--Choose contact-->
     <Button
         android:id="@+id/crime_suspect"
         android:layout_width="match_parent"
@@ -192,7 +191,15 @@
         android:layout_marginRight="16dp"
         android:text="@string/crime_suspect_text"/>
 
-    // Send report
+    <Button
+        android:id="@+id/call_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/call_coach_text"/>
+
+    <!--Send report-->
     <Button
         android:id="@+id/crime_report"
         android:layout_width="match_parent"
