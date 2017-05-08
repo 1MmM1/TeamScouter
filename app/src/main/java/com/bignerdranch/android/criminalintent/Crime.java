@@ -7,14 +7,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class Crime {
+public class Crime implements Comparable <Crime> {
 
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
     private String mSuspect;
-    private String results;
     private int mType;
     private String number;
     private String mWins;
@@ -36,6 +35,7 @@ public class Crime {
         mWins = "0";
         mTies = "0";
         mLosses = "0";
+        mTitle = "";
     }
 
     public void setNumber(String num) {number = num;}
@@ -130,5 +130,13 @@ public class Crime {
     public String getHangString()
     {
         return(hangingTypes.get(mHang));
+    }
+
+    public int compareTo(Crime crime) {
+        int wins = Integer.parseInt(mWins);
+        int crimeWins = Integer.parseInt(crime.mWins);
+        if (wins == crimeWins)
+            return mTitle.compareTo(crime.mTitle);
+        return (crimeWins - wins);
     }
 }
