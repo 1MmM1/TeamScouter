@@ -2,11 +2,13 @@ package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
@@ -160,8 +163,7 @@ public class CrimeListFragment extends Fragment {
 
     public void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
-
+        ArrayList<Crime> crimes = crimeLab.getCrimes();
         if(crimes.size() == 0)
         {
             mEmptyCrimeView.setVisibility(View.VISIBLE);
@@ -179,6 +181,7 @@ public class CrimeListFragment extends Fragment {
         {
             //The problem with mAdapter.notifyItemChanged(mCurrentPosition); is that if you swipe left/right after
             //changing something, it will not reload the changed fragment when you come back to list view.
+
             mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
@@ -191,6 +194,7 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private TextView mWinLossTie;
+        private TextView mRanking;
 //        private CheckBox mSolvedCheckBox;
 
         private Crime mCrime;
@@ -202,6 +206,7 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
             mWinLossTie = (TextView) itemView.findViewById(R.id.list_item_win_loss_tie_text_view);
+            mRanking = (TextView) itemView.findViewById(R.id.team_rank_text_view);
             // The checkbox was changed to a text view so we still have to write the code for that
 //            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
 //            mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -213,13 +218,12 @@ public class CrimeListFragment extends Fragment {
 //            });
         }
 
-        public void bindCrime(Crime crime) {
+        public void bindCrime(Crime crime, int position) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
             mDateTextView.setText(mCrime.getNumber());
             mWinLossTie.setText(getString(R.string.win_loss_ties, mCrime.getWins(), mCrime.getTies(), mCrime.getLosses()));
-                    //android.text.format.DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
-//            mSolvedCheckBox.setChecked(mCrime.isSolved());
+            mRanking.setText(getString(R.string.rank, position + ""));
         }
 
         @Override
@@ -229,6 +233,7 @@ public class CrimeListFragment extends Fragment {
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+        private static final String TAG = "CrimeAdapter";
 
         private List<Crime> mCrimes;
 
@@ -246,7 +251,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
-            holder.bindCrime(crime);
+            holder.bindCrime(crime, position + 1);
         }
 
         @Override
