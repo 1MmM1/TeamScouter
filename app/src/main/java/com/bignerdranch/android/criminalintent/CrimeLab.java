@@ -35,22 +35,22 @@ public class CrimeLab {
 
     }
 
-    public void addCrime(Crime c)
+    public void addCrime(Team c)
     {
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    public void deleteCrime(Crime c)
+    public void deleteCrime(Team c)
     {
         String uuidString = c.getId().toString();
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{uuidString});
     }
 
-    public ArrayList<Crime> getCrimes()
+    public ArrayList<Team> getCrimes()
     {
-        ArrayList<Crime> crimes = new ArrayList<>();
+        ArrayList<Team> teams = new ArrayList<>();
 
         CrimeCursorWrapper cursor = queryCrimes(null, null);
 
@@ -59,7 +59,7 @@ public class CrimeLab {
             cursor.moveToFirst();
             while(!cursor.isAfterLast())
             {
-                crimes.add(cursor.getCrime());
+                teams.add(cursor.getCrime());
                 cursor.moveToNext();
             }
         }
@@ -67,11 +67,11 @@ public class CrimeLab {
         {
             cursor.close();
         }
-        Collections.sort(crimes);
-        return(crimes);
+        Collections.sort(teams);
+        return(teams);
     }
 
-    public Crime getCrime(UUID id)
+    public Team getCrime(UUID id)
     {
         CrimeCursorWrapper cursor = queryCrimes(CrimeTable.Cols.UUID + " = ?", new String[] { id.toString() });
 
@@ -90,7 +90,7 @@ public class CrimeLab {
         }
     }
 
-    public File getPhotoFile(Crime crime)
+    public File getPhotoFile(Team team)
     {
         File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
@@ -99,31 +99,31 @@ public class CrimeLab {
             return null;
         }
 
-        return(new File(externalFilesDir, crime.getPhotoFilename()));
+        return(new File(externalFilesDir, team.getPhotoFilename()));
     }
 
-    public void updateCrime(Crime crime)
+    public void updateCrime(Team team)
     {
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+        String uuidString = team.getId().toString();
+        ContentValues values = getContentValues(team);
         mDatabase.update(CrimeTable.NAME, values, CrimeTable.Cols.UUID + " = ?", new String[]{uuidString});
     }
 
-    public static ContentValues getContentValues(Crime crime)
+    public static ContentValues getContentValues(Team team)
     {
         ContentValues values = new ContentValues();
-        values.put(CrimeTable.Cols.UUID, crime.getId().toString());
-        values.put(CrimeTable.Cols.NUMBER, crime.getNumber());
-        values.put(CrimeTable.Cols.TITLE, crime.getTitle());
-        values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
-        values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
-        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
-        values.put(CrimeTable.Cols.WINS, crime.getWins());
-        values.put(CrimeTable.Cols.TIES, crime.getTies());
-        values.put(CrimeTable.Cols.LOSSES, crime.getLosses());
-        values.put(CrimeTable.Cols.DISQUALS, crime.getDisquals());
-        values.put(CrimeTable.Cols.TYPE, crime.getType());
-        values.put(CrimeTable.Cols.HANG, crime.getHang());
+        values.put(CrimeTable.Cols.UUID, team.getId().toString());
+        values.put(CrimeTable.Cols.NUMBER, team.getNumber());
+        values.put(CrimeTable.Cols.TITLE, team.getTitle());
+        values.put(CrimeTable.Cols.DATE, team.getDate().getTime());
+        values.put(CrimeTable.Cols.SOLVED, team.isSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.SUSPECT, team.getSuspect());
+        values.put(CrimeTable.Cols.WINS, team.getWins());
+        values.put(CrimeTable.Cols.TIES, team.getTies());
+        values.put(CrimeTable.Cols.LOSSES, team.getLosses());
+        values.put(CrimeTable.Cols.DISQUALS, team.getDisquals());
+        values.put(CrimeTable.Cols.TYPE, team.getType());
+        values.put(CrimeTable.Cols.HANG, team.getHang());
         return(values);
     }
 

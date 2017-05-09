@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import java.util.Date;
-
 /**
  * Created by gwc on 5/5/2017.
  */
@@ -44,7 +42,7 @@ public class HangFragment extends DialogFragment {
         mHangBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                Toast.makeText(getActivity(), Crime.hangingTypes.get(progress), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), Team.hangingTypes.get(progress), Toast.LENGTH_SHORT).show();
             }
 
             @Override
