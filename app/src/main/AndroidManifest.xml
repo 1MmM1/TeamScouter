@@ -14,9 +14,9 @@
         <activity
             android:name=".CrimePagerActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".CrimeListActivity">
+            android:parentActivityName=".TeamListActivity">
         </activity>
-        <activity android:name=".CrimeListActivity">
+        <activity android:name=".TeamListActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

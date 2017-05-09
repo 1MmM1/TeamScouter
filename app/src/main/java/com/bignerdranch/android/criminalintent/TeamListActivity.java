@@ -3,7 +3,7 @@ package com.bignerdranch.android.criminalintent;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-public class CrimeListActivity extends SingleFragmentActivity
+public class TeamListActivity extends SingleFragmentActivity
     implements TeamListFragment.Callbacks, TeamFragment.Callbacks{
 
     @Override
