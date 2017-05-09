@@ -40,10 +40,10 @@ import java.util.Date;
 import java.io.File;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment implements
+public class TeamFragment extends Fragment implements
         AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = "CrimeFragment";
+    private static final String TAG = "TeamFragment";
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
@@ -88,11 +88,11 @@ public class CrimeFragment extends Fragment implements
         void onCrimeUpdated(Team team);
     }
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static TeamFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
 
-        CrimeFragment fragment = new CrimeFragment();
+        TeamFragment fragment = new TeamFragment();
         fragment.setArguments(args);
         return(fragment);
     }
@@ -180,7 +180,7 @@ public class CrimeFragment extends Fragment implements
             {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mTeam.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
                 updateDate();            }
         });
@@ -287,7 +287,7 @@ public class CrimeFragment extends Fragment implements
             {
                 FragmentManager manager = getFragmentManager();
                 PictureFragment dialog = PictureFragment.newInstance(mPhotoFile);
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_ZOOM);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_ZOOM);
                 dialog.show(manager, DIALOG_PICTURE);
             }
         });
@@ -421,7 +421,7 @@ public class CrimeFragment extends Fragment implements
             {
                 FragmentManager manager = getFragmentManager();
                 HangFragment dialog = HangFragment.newInstance(mTeam.getHang());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_HANG);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_HANG);
                 dialog.show(manager, DIALOG_HANG);
                 updateHanging();
             }
@@ -521,7 +521,7 @@ public class CrimeFragment extends Fragment implements
             case(R.id.menu_item_delete_crime):
                 FragmentManager manager = getFragmentManager();
                 DeleteConfirmationFragment dialog = DeleteConfirmationFragment.newInstance();
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DELETE);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_DELETE);
                 dialog.show(manager, DIALOG_DELETE);
                 return(true);
             default:

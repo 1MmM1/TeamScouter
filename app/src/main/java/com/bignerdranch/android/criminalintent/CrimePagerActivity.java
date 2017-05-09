@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 
 public class CrimePagerActivity extends AppCompatActivity
-        implements CrimeFragment.Callbacks
+        implements TeamFragment.Callbacks
 {
 
     private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
@@ -55,7 +55,7 @@ public class CrimePagerActivity extends AppCompatActivity
             @Override
             public Fragment getItem(int position) {
                 Team team = mTeams.get(position);
-                return CrimeFragment.newInstance(team.getId());
+                return TeamFragment.newInstance(team.getId());
             }
 
             @Override
