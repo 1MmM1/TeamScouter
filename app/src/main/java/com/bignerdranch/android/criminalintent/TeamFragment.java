@@ -510,7 +510,7 @@ public class TeamFragment extends Fragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime, menu);
+        inflater.inflate(R.menu.fragment_team, menu);
     }
 
     @Override
