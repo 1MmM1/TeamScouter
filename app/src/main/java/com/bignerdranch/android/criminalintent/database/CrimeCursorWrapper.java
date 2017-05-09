@@ -2,8 +2,9 @@ package com.bignerdranch.android.criminalintent.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.widget.Spinner;
 
-import com.bignerdranch.android.criminalintent.Team;
+import com.bignerdranch.android.criminalintent.Crime;
 import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class CrimeCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public Team getCrime()
+    public Crime getCrime()
     {
         String uuidString = getString(getColumnIndex(CrimeTable.Cols.UUID));
         String title = getString(getColumnIndex(CrimeTable.Cols.TITLE));
@@ -34,20 +35,20 @@ public class CrimeCursorWrapper extends CursorWrapper {
         int disquals = getInt(getColumnIndex(CrimeTable.Cols.DISQUALS));
 
 
-        Team team = new Team(UUID.fromString(uuidString));
-        team.setTitle(title);
-        team.setNumber(number);
-        team.setDate(new Date(date));
-        team.setSolved(isSolved != 0);
-        team.setSuspect(suspect);
-        team.setWins(wins);
-        team.setLosses(losses);
-        team.setTies(ties);
-        team.setDisquals(disquals);
-        team.setType(type);
-        team.setHang(hang);
+        Crime crime = new Crime(UUID.fromString(uuidString));
+        crime.setTitle(title);
+        crime.setNumber(number);
+        crime.setDate(new Date(date));
+        crime.setSolved(isSolved != 0);
+        crime.setSuspect(suspect);
+        crime.setWins(wins);
+        crime.setLosses(losses);
+        crime.setTies(ties);
+        crime.setDisquals(disquals);
+        crime.setType(type);
+        crime.setHang(hang);
 
 
-        return team;
+        return crime;
     }
 }

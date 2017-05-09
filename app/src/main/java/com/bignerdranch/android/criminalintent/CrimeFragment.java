@@ -57,7 +57,7 @@ public class CrimeFragment extends Fragment implements
     private static final int REQUEST_ZOOM = 200;
     private static final int REQUEST_HANG = 300;
 
-    private Team mTeam;
+    private Crime mTeam;
     private File mPhotoFile;
     private EditText mTitleField;
     private EditText mNumberField;
@@ -85,7 +85,7 @@ public class CrimeFragment extends Fragment implements
 
     public interface Callbacks
     {
-        void onCrimeUpdated(Team team);
+        void onCrimeUpdated(Crime crime);
     }
 
     public static CrimeFragment newInstance(UUID crimeId) {
