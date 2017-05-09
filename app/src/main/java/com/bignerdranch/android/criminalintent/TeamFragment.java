@@ -143,7 +143,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTeam.setTitle(s.toString());
-                updateCrime();
+                updateTeam();
             }
 
             @Override
@@ -163,7 +163,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTeam.setNumber(s.toString());
-                updateCrime();
+                updateTeam();
             }
 
             @Override
@@ -192,7 +192,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mTeam.setSolved(isChecked);
-                updateCrime();
+                updateTeam();
             }
         });
 
@@ -200,7 +200,7 @@ public class TeamFragment extends Fragment implements
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent i = ShareCompat.IntentBuilder.from(getActivity()).setType("text/plain").setText(getCrimeReport())
+                Intent i = ShareCompat.IntentBuilder.from(getActivity()).setType("text/plain").setText(getTeamSummary())
                         .setSubject(getString(R.string.team_report_subject)).getIntent();
                 i = Intent.createChooser(i, getString(R.string.send_report));
                 startActivity(i);
@@ -316,7 +316,7 @@ public class TeamFragment extends Fragment implements
                     mSubtractButton.setEnabled(true);
                 }
                 updateDisquals();
-                updateCrime();
+                updateTeam();
                 Log.i(TAG, "Added one: " + mTeam.getDisquals());
             }
         });
@@ -338,7 +338,7 @@ public class TeamFragment extends Fragment implements
                     mSubtractButton.setEnabled(false);
                 }
                 updateDisquals();
-                updateCrime();
+                updateTeam();
                 Log.i(TAG, "Subtracted one: " + mTeam.getDisquals());
             }
         });
@@ -355,7 +355,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTeam.setWins(s.toString());
-                updateCrime();
+                updateTeam();
             }
 
             @Override
@@ -375,7 +375,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTeam.setLosses(s.toString());
-                updateCrime();
+                updateTeam();
             }
 
             @Override
@@ -395,7 +395,7 @@ public class TeamFragment extends Fragment implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTeam.setTies(s.toString());
-                updateCrime();
+                updateTeam();
             }
 
             @Override
@@ -445,7 +445,7 @@ public class TeamFragment extends Fragment implements
         {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mTeam.setDate(date);
-            updateCrime();
+            updateTeam();
             updateDate();
         }
         else if(requestCode == REQUEST_CONTACT && data != null)
@@ -463,7 +463,7 @@ public class TeamFragment extends Fragment implements
                 c.moveToFirst();
                 String suspect = c.getString(0);
                 mTeam.setSuspect(suspect);
-                updateCrime();
+                updateTeam();
                 mContactButton.setText(suspect);
                 mCallButton.setEnabled(true);
                 teamId = c.getInt(1);
@@ -475,7 +475,7 @@ public class TeamFragment extends Fragment implements
         }
         else if(requestCode == REQUEST_PHOTO)
         {
-            updateCrime();
+            updateTeam();
             updatePhotoView();
         }
 
@@ -489,7 +489,7 @@ public class TeamFragment extends Fragment implements
         if(requestCode == REQUEST_HANG)
         {
             mTeam.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
-            updateCrime();
+            updateTeam();
             updateHanging();
         }
 
@@ -498,7 +498,7 @@ public class TeamFragment extends Fragment implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         mTeam.setType(position);
-        updateCrime();
+        updateTeam();
     }
 
     @Override
@@ -529,7 +529,7 @@ public class TeamFragment extends Fragment implements
         }
     }
 
-    private void updateCrime()
+    private void updateTeam()
     {
         CrimeLab.get(getActivity()).updateCrime(mTeam);
         mCallbacks.onCrimeUpdated(mTeam);
@@ -549,7 +549,7 @@ public class TeamFragment extends Fragment implements
         mHangButton.setText(getString(R.string.hang_text, mTeam.getHangString()));
     }
 
-    private String getCrimeReport()
+    private String getTeamSummary()
     {
         String solvedString = null;
         if(mTeam.isSolved())
