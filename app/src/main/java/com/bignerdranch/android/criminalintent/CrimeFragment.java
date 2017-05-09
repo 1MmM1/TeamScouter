@@ -57,15 +57,15 @@ public class CrimeFragment extends Fragment implements
     private static final int REQUEST_ZOOM = 200;
     private static final int REQUEST_HANG = 300;
 
-    private Crime mCrime;
+    private Crime mTeam;
     private File mPhotoFile;
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckbox;
+    private CheckBox mCubesCheckbox;
     private TextView mDisquals;
     private Button mReportButton;
-    private Button mSuspectButton;
+    private Button mContactButton;
     private Button mCallButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
@@ -108,8 +108,8 @@ public class CrimeFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
-        mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
+        mTeam = CrimeLab.get(getActivity()).getCrime(crimeId);
+        mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mTeam);
         setHasOptionsMenu(true);
     }
 
@@ -118,7 +118,7 @@ public class CrimeFragment extends Fragment implements
     {
         super.onPause();
 
-        CrimeLab.get(getActivity()).updateCrime(mCrime);
+        CrimeLab.get(getActivity()).updateCrime(mTeam);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class CrimeFragment extends Fragment implements
         final View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.crime_title);
-        mTitleField.setText(mCrime.getTitle());
+        mTitleField.setText(mTeam.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,7 +142,7 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString());
+                mTeam.setTitle(s.toString());
                 updateCrime();
             }
 
@@ -153,7 +153,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mNumberField = (EditText) v.findViewById(R.id.team_number);
-        mNumberField.setText(mCrime.getNumber());
+        mNumberField.setText(mTeam.getNumber());
         mNumberField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -162,7 +162,7 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setNumber(s.toString());
+                mTeam.setNumber(s.toString());
                 updateCrime();
             }
 
@@ -179,19 +179,19 @@ public class CrimeFragment extends Fragment implements
             public void onClick(View v)
             {
                 FragmentManager manager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mTeam.getDate());
                 dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
                 updateDate();            }
         });
 
 
-        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
-        mSolvedCheckbox.setChecked(mCrime.isSolved());
-        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mCubesCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mCubesCheckbox.setChecked(mTeam.isSolved());
+        mCubesCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mCrime.setSolved(isChecked);
+                mTeam.setSolved(isChecked);
                 updateCrime();
             }
         });
@@ -208,17 +208,17 @@ public class CrimeFragment extends Fragment implements
         });
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
-        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+        mContactButton = (Button) v.findViewById(R.id.crime_suspect);
+        mContactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
 
-        if(mCrime.getSuspect() != null)
+        if(mTeam.getSuspect() != null)
         {
-            mSuspectButton.setText(mCrime.getSuspect());
+            mContactButton.setText(mTeam.getSuspect());
         }
 
         mCallButton = (Button) v.findViewById(R.id.call_contact);
@@ -253,9 +253,9 @@ public class CrimeFragment extends Fragment implements
         PackageManager packageManager = getActivity().getPackageManager();
         if(packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null)
         {
-            mSuspectButton.setEnabled(false);
+            mContactButton.setEnabled(false);
         }
-        if(mCrime.getSuspect() == null)
+        if(mTeam.getSuspect() == null)
         {
             mCallButton.setEnabled(false);
         }
@@ -310,19 +310,19 @@ public class CrimeFragment extends Fragment implements
             @Override
             public void onClick(View v)
             {
-                mCrime.setDisquals(mCrime.getDisquals() + 1);
-                if (mCrime.getDisquals() > 0)
+                mTeam.setDisquals(mTeam.getDisquals() + 1);
+                if (mTeam.getDisquals() > 0)
                 {
                     mSubtractButton.setEnabled(true);
                 }
                 updateDisquals();
                 updateCrime();
-                Log.i(TAG, "Added one: " + mCrime.getDisquals());
+                Log.i(TAG, "Added one: " + mTeam.getDisquals());
             }
         });
 
         mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
-        Log.i(TAG, "Firt Pass: " + mCrime.getDisquals());
+        Log.i(TAG, "Firt Pass: " + mTeam.getDisquals());
         updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
@@ -330,22 +330,22 @@ public class CrimeFragment extends Fragment implements
             @Override
             public void onClick(View v)
             {
-                mCrime.setDisquals(mCrime.getDisquals() - 1);
+                mTeam.setDisquals(mTeam.getDisquals() - 1);
 
-                if(mCrime.getDisquals() <= 0)
+                if(mTeam.getDisquals() <= 0)
                 {
-                    mCrime.setDisquals(0);
+                    mTeam.setDisquals(0);
                     mSubtractButton.setEnabled(false);
                 }
                 updateDisquals();
                 updateCrime();
-                Log.i(TAG, "Subtracted one: " + mCrime.getDisquals());
+                Log.i(TAG, "Subtracted one: " + mTeam.getDisquals());
             }
         });
 
 
         mWins = (EditText) v.findViewById(R.id.wins);
-        mWins.setText(mCrime.getWins());
+        mWins.setText(mTeam.getWins());
         mWins.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -354,7 +354,7 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setWins(s.toString());
+                mTeam.setWins(s.toString());
                 updateCrime();
             }
 
@@ -365,7 +365,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mLosses = (EditText) v.findViewById(R.id.losses);
-        mLosses.setText(mCrime.getLosses());
+        mLosses.setText(mTeam.getLosses());
         mLosses.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -374,7 +374,7 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setLosses(s.toString());
+                mTeam.setLosses(s.toString());
                 updateCrime();
             }
 
@@ -385,7 +385,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mTies = (EditText) v.findViewById(R.id.ties);
-        mTies.setText(mCrime.getTies());
+        mTies.setText(mTeam.getTies());
         mTies.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -394,7 +394,7 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTies(s.toString());
+                mTeam.setTies(s.toString());
                 updateCrime();
             }
 
@@ -410,7 +410,7 @@ public class CrimeFragment extends Fragment implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mTypeSpinner.setAdapter(adapter);
                 mTypeSpinner.setOnItemSelectedListener(this);
-                mTypeSpinner.setSelection(mCrime.getType());
+                mTypeSpinner.setSelection(mTeam.getType());
         Log.i(TAG, "spinner change:" + mTypeSpinner.getSelectedItem().toString());
 
         mHangButton = (Button) v.findViewById(R.id.hang_button);
@@ -420,7 +420,7 @@ public class CrimeFragment extends Fragment implements
             public void onClick(View v)
             {
                 FragmentManager manager = getFragmentManager();
-                HangFragment dialog = HangFragment.newInstance(mCrime.getHang());
+                HangFragment dialog = HangFragment.newInstance(mTeam.getHang());
                 dialog.setTargetFragment(CrimeFragment.this, REQUEST_HANG);
                 dialog.show(manager, DIALOG_HANG);
                 updateHanging();
@@ -444,7 +444,7 @@ public class CrimeFragment extends Fragment implements
         if(requestCode == REQUEST_DATE)
         {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mCrime.setDate(date);
+            mTeam.setDate(date);
             updateCrime();
             updateDate();
         }
@@ -462,9 +462,9 @@ public class CrimeFragment extends Fragment implements
                 }
                 c.moveToFirst();
                 String suspect = c.getString(0);
-                mCrime.setSuspect(suspect);
+                mTeam.setSuspect(suspect);
                 updateCrime();
-                mSuspectButton.setText(suspect);
+                mContactButton.setText(suspect);
                 mCallButton.setEnabled(true);
                 teamId = c.getInt(1);
             }
@@ -482,13 +482,13 @@ public class CrimeFragment extends Fragment implements
         if(requestCode == REQUEST_DELETE)
         {
             //should this be changed as well, seeing as we can no longer exit the activity?
-            CrimeLab.get(getActivity()).deleteCrime(mCrime);
+            CrimeLab.get(getActivity()).deleteCrime(mTeam);
             getActivity().finish();
         }
 
         if(requestCode == REQUEST_HANG)
         {
-            mCrime.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
+            mTeam.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
             updateCrime();
             updateHanging();
         }
@@ -497,7 +497,7 @@ public class CrimeFragment extends Fragment implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        mCrime.setType(position);
+        mTeam.setType(position);
         updateCrime();
     }
 
@@ -531,28 +531,28 @@ public class CrimeFragment extends Fragment implements
 
     private void updateCrime()
     {
-        CrimeLab.get(getActivity()).updateCrime(mCrime);
-        mCallbacks.onCrimeUpdated(mCrime);
+        CrimeLab.get(getActivity()).updateCrime(mTeam);
+        mCallbacks.onCrimeUpdated(mTeam);
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
+        mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mTeam.getDate()));
     }
 
     private void updateDisquals()
     {
-        mDisquals.setText(getString(R.string.disquals_text, "" + mCrime.getDisquals()));
+        mDisquals.setText(getString(R.string.disquals_text, "" + mTeam.getDisquals()));
     }
 
     private void updateHanging()
     {
-        mHangButton.setText(getString(R.string.hang_text, mCrime.getHangString()));
+        mHangButton.setText(getString(R.string.hang_text, mTeam.getHangString()));
     }
 
     private String getCrimeReport()
     {
         String solvedString = null;
-        if(mCrime.isSolved())
+        if(mTeam.isSolved())
         {
             solvedString = getString(R.string.crime_report_solved);
         }
@@ -562,9 +562,9 @@ public class CrimeFragment extends Fragment implements
         }
 
         String dateFormat = "EEE, MMM dd";
-        String dateString = DateFormat.format(dateFormat, mCrime.getDate()).toString();
+        String dateString = DateFormat.format(dateFormat, mTeam.getDate()).toString();
 
-        String suspect = mCrime.getSuspect();
+        String suspect = mTeam.getSuspect();
         if(suspect == null)
         {
             suspect = getString(R.string.crime_report_no_suspect);
@@ -574,7 +574,7 @@ public class CrimeFragment extends Fragment implements
             suspect = getString(R.string.crime_report_suspect, suspect);
         }
 
-        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
+        String report = getString(R.string.crime_report, mTeam.getTitle(), dateString, solvedString, suspect);
         return report;
     }
 
