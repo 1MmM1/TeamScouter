@@ -189,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/crime_suspect_text"/>
+        android:text="@string/team_contact_text"/>
 
     <Button
         android:id="@+id/call_contact"
@@ -206,7 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/crime_report_text"/>
+        android:text="@string/send_report_text"/>
     </LinearLayout>
 
 </ScrollView>

@@ -38,14 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:hint="@string/crime_title_hint"/>
+            android:hint="@string/team_name_hint"/>
 
         <EditText
             android:id="@+id/team_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:hint="@string/crime_number_hint"/>
+            android:hint="@string/team_number_hint"/>
 
 
 

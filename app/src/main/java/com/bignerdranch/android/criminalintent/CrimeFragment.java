@@ -201,7 +201,7 @@ public class CrimeFragment extends Fragment implements
             public void onClick(View v)
             {
                 Intent i = ShareCompat.IntentBuilder.from(getActivity()).setType("text/plain").setText(getCrimeReport())
-                        .setSubject(getString(R.string.crime_report_subject)).getIntent();
+                        .setSubject(getString(R.string.team_report_subject)).getIntent();
                 i = Intent.createChooser(i, getString(R.string.send_report));
                 startActivity(i);
             }
@@ -554,11 +554,11 @@ public class CrimeFragment extends Fragment implements
         String solvedString = null;
         if(mTeam.isSolved())
         {
-            solvedString = getString(R.string.crime_report_solved);
+            solvedString = getString(R.string.team_report_cubes);
         }
         else
         {
-            solvedString = getString(R.string.crime_report_unsolved);
+            solvedString = getString(R.string.team_report_no_cubes);
         }
 
         String dateFormat = "EEE, MMM dd";
@@ -567,14 +567,14 @@ public class CrimeFragment extends Fragment implements
         String suspect = mTeam.getSuspect();
         if(suspect == null)
         {
-            suspect = getString(R.string.crime_report_no_suspect);
+            suspect = getString(R.string.team_report_no_contact);
         }
         else
         {
-            suspect = getString(R.string.crime_report_suspect, suspect);
+            suspect = getString(R.string.team_report_contact, suspect);
         }
 
-        String report = getString(R.string.crime_report, mTeam.getTitle(), dateString, solvedString, suspect);
+        String report = getString(R.string.team_report, mTeam.getTitle(), dateString, solvedString, suspect);
         return report;
     }
 
