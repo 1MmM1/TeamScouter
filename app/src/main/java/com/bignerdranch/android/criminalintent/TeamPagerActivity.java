@@ -16,7 +16,7 @@ import java.util.UUID;
  * Created by gwc on 3/4/2017.
  */
 
-public class CrimePagerActivity extends AppCompatActivity
+public class TeamPagerActivity extends AppCompatActivity
         implements TeamFragment.Callbacks
 {
 
@@ -27,7 +27,7 @@ public class CrimePagerActivity extends AppCompatActivity
 
     public static Intent newIntent(Context packageContext, UUID crimeId)
     {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
+        Intent intent = new Intent(packageContext, TeamPagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }

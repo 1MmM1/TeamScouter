@@ -29,7 +29,7 @@ public class TeamListActivity extends SingleFragmentActivity
     {
         if(findViewById(R.id.detail_fragment_container) == null)
         {
-            Intent intent = CrimePagerActivity.newIntent(this, team.getId());
+            Intent intent = TeamPagerActivity.newIntent(this, team.getId());
             startActivity(intent);
         }
         else
