@@ -78,7 +78,7 @@ public class TeamListFragment extends Fragment {
 
     private void createCrime() {
         Team team = new Team();
-        CrimeLab.get(getActivity()).addCrime(team);
+        TeamLab.get(getActivity()).addCrime(team);
         updateUI();
         mCallbacks.onCrimeSelected(team);
     }
@@ -140,10 +140,10 @@ public class TeamListFragment extends Fragment {
 
     private void updateSubtitle()
     {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-//        int crimeCount = crimeLab.getCrimes().size();
+        TeamLab teamLab = TeamLab.get(getActivity());
+//        int crimeCount = teamLab.getCrimes().size();
 //        String subtitle = getString(R.string.subtitle_format, crimeCount);
-        int crimeSize = crimeLab.getCrimes().size();
+        int crimeSize = teamLab.getCrimes().size();
         String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
 
         if(!mSubtitleVisible)
@@ -156,8 +156,8 @@ public class TeamListFragment extends Fragment {
     }
 
     public void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        ArrayList<Team> teams = crimeLab.getCrimes();
+        TeamLab teamLab = TeamLab.get(getActivity());
+        ArrayList<Team> teams = teamLab.getCrimes();
         if(teams.size() == 0)
         {
             mEmptyCrimeView.setVisibility(View.VISIBLE);
@@ -207,7 +207,7 @@ public class TeamListFragment extends Fragment {
 //                @Override
 //                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //                    mTeam.setSolved(isChecked);
-//                    CrimeLab.get(getActivity()).updateCrime(mTeam);
+//                    TeamLab.get(getActivity()).updateCrime(mTeam);
 //                }
 //            });
         }
