@@ -1,14 +1,11 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,11 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +32,7 @@ public class CrimeListFragment extends Fragment {
 
     public interface Callbacks
     {
-        void onCrimeSelected(Crime crime);
+        void onCrimeSelected(Team team);
     }
 
     @Override
@@ -83,10 +77,10 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void createCrime() {
-        Crime crime = new Crime();
-        CrimeLab.get(getActivity()).addCrime(crime);
+        Team team = new Team();
+        CrimeLab.get(getActivity()).addCrime(team);
         updateUI();
-        mCallbacks.onCrimeSelected(crime);
+        mCallbacks.onCrimeSelected(team);
     }
 
     @Override
@@ -163,8 +157,8 @@ public class CrimeListFragment extends Fragment {
 
     public void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
-        ArrayList<Crime> crimes = crimeLab.getCrimes();
-        if(crimes.size() == 0)
+        ArrayList<Team> teams = crimeLab.getCrimes();
+        if(teams.size() == 0)
         {
             mEmptyCrimeView.setVisibility(View.VISIBLE);
         }
@@ -174,7 +168,7 @@ public class CrimeListFragment extends Fragment {
         }
 
         if(mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
+            mAdapter = new CrimeAdapter(teams);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }
         else
@@ -182,7 +176,7 @@ public class CrimeListFragment extends Fragment {
             //The problem with mAdapter.notifyItemChanged(mCurrentPosition); is that if you swipe left/right after
             //changing something, it will not reload the changed fragment when you come back to list view.
 
-            mAdapter.setCrimes(crimes);
+            mAdapter.setTeams(teams);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -197,7 +191,7 @@ public class CrimeListFragment extends Fragment {
         private TextView mRanking;
 //        private CheckBox mSolvedCheckBox;
 
-        private Crime mCrime;
+        private Team mTeam;
 
         public CrimeHolder(View itemView) {
             super(itemView);
@@ -212,33 +206,33 @@ public class CrimeListFragment extends Fragment {
 //            mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
 //                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    mCrime.setSolved(isChecked);
-//                    CrimeLab.get(getActivity()).updateCrime(mCrime);
+//                    mTeam.setSolved(isChecked);
+//                    CrimeLab.get(getActivity()).updateCrime(mTeam);
 //                }
 //            });
         }
 
-        public void bindCrime(Crime crime, int position) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getNumber());
-            mWinLossTie.setText(getString(R.string.win_loss_ties, mCrime.getWins(), mCrime.getTies(), mCrime.getLosses()));
+        public void bindCrime(Team team, int position) {
+            mTeam = team;
+            mTitleTextView.setText(mTeam.getTitle());
+            mDateTextView.setText(mTeam.getNumber());
+            mWinLossTie.setText(getString(R.string.win_loss_ties, mTeam.getWins(), mTeam.getTies(), mTeam.getLosses()));
             mRanking.setText(getString(R.string.rank, position + ""));
         }
 
         @Override
         public void onClick(View v) {
-            mCallbacks.onCrimeSelected(mCrime);
+            mCallbacks.onCrimeSelected(mTeam);
         }
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
         private static final String TAG = "CrimeAdapter";
 
-        private List<Crime> mCrimes;
+        private List<Team> mTeams;
 
-        public CrimeAdapter(List<Crime> crimes) {
-            mCrimes = crimes;
+        public CrimeAdapter(List<Team> teams) {
+            mTeams = teams;
         }
 
         @Override
@@ -250,18 +244,18 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-            Crime crime = mCrimes.get(position);
-            holder.bindCrime(crime, position + 1);
+            Team team = mTeams.get(position);
+            holder.bindCrime(team, position + 1);
         }
 
         @Override
         public int getItemCount() {
-            return mCrimes.size();
+            return mTeams.size();
         }
 
-        public void setCrimes(List<Crime> crimes)
+        public void setTeams(List<Team> teams)
         {
-            mCrimes = crimes;
+            mTeams = teams;
         }
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,7 +23,7 @@ public class CrimePagerActivity extends AppCompatActivity
     private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
 
     private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    private List<Team> mTeams;
 
     public static Intent newIntent(Context packageContext, UUID crimeId)
     {
@@ -34,7 +33,7 @@ public class CrimePagerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCrimeUpdated(Crime crime)
+    public void onCrimeUpdated(Team team)
     {
 
     }
@@ -49,25 +48,25 @@ public class CrimePagerActivity extends AppCompatActivity
 
         mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
 
-        mCrimes = CrimeLab.get(this).getCrimes();
+        mTeams = CrimeLab.get(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+                Team team = mTeams.get(position);
+                return CrimeFragment.newInstance(team.getId());
             }
 
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mTeams.size();
             }
         });
 
-        for(int i = 0; i < mCrimes.size(); i++)
+        for(int i = 0; i < mTeams.size(); i++)
         {
-            if(mCrimes.get(i).getId().equals(crimeId))
+            if(mTeams.get(i).getId().equals(crimeId))
             {
                 mViewPager.setCurrentItem(i);
                 break;
