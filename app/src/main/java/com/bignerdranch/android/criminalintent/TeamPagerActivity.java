@@ -42,7 +42,7 @@ public class TeamPagerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
+        setContentView(R.layout.activity_team_pager);
 
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
