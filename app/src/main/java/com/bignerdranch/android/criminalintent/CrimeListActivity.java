@@ -4,17 +4,17 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 public class CrimeListActivity extends SingleFragmentActivity
-    implements CrimeListFragment.Callbacks, TeamFragment.Callbacks{
+    implements TeamListFragment.Callbacks, TeamFragment.Callbacks{
 
     @Override
     protected Fragment createFragment() {
-        return new CrimeListFragment();
+        return new TeamListFragment();
     }
 
     @Override
     public void onCrimeUpdated(Team team)
     {
-        CrimeListFragment listFragment = (CrimeListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        TeamListFragment listFragment = (TeamListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         listFragment.updateUI();
     }
 
