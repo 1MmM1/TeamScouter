@@ -25,7 +25,7 @@ public class TeamListActivity extends SingleFragmentActivity
     }
 
     @Override
-    public void onCrimeSelected(Team team)
+    public void onTeamSelected(Team team)
     {
         if(findViewById(R.id.detail_fragment_container) == null)
         {

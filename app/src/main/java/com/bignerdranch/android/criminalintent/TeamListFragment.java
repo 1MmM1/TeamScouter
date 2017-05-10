@@ -32,7 +32,7 @@ public class TeamListFragment extends Fragment {
 
     public interface Callbacks
     {
-        void onCrimeSelected(Team team);
+        void onTeamSelected(Team team);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class TeamListFragment extends Fragment {
         Team team = new Team();
         TeamLab.get(getActivity()).addTeam(team);
         updateUI();
-        mCallbacks.onCrimeSelected(team);
+        mCallbacks.onTeamSelected(team);
     }
 
     @Override
@@ -141,8 +141,6 @@ public class TeamListFragment extends Fragment {
     private void updateSubtitle()
     {
         TeamLab teamLab = TeamLab.get(getActivity());
-//        int crimeCount = teamLab.getTeam().size();
-//        String subtitle = getString(R.string.subtitle_format, crimeCount);
         int teamSize = teamLab.getTeam().size();
         String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, teamSize, teamSize);
 
@@ -173,9 +171,6 @@ public class TeamListFragment extends Fragment {
         }
         else
         {
-            //The problem with mAdapter.notifyItemChanged(mCurrentPosition); is that if you swipe left/right after
-            //changing something, it will not reload the changed fragment when you come back to list view.
-
             mAdapter.setTeams(teams);
             mAdapter.notifyDataSetChanged();
         }
@@ -189,7 +184,6 @@ public class TeamListFragment extends Fragment {
         private TextView mDateTextView;
         private TextView mWinLossTie;
         private TextView mRanking;
-//        private CheckBox mSolvedCheckBox;
 
         private Team mTeam;
 
@@ -201,15 +195,6 @@ public class TeamListFragment extends Fragment {
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_team_number_text_view);
             mWinLossTie = (TextView) itemView.findViewById(R.id.list_item_win_loss_tie_text_view);
             mRanking = (TextView) itemView.findViewById(R.id.team_rank_text_view);
-            // The checkbox was changed to a text view so we still have to write the code for that
-//            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
-//            mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    mTeam.setSolved(isChecked);
-//                    TeamLab.get(getActivity()).updateTeam(mTeam);
-//                }
-//            });
         }
 
         public void bindTeam(Team team, int position) {
@@ -222,7 +207,7 @@ public class TeamListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            mCallbacks.onCrimeSelected(mTeam);
+            mCallbacks.onTeamSelected(mTeam);
         }
     }
 
