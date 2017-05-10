@@ -34,6 +34,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -359,6 +360,8 @@ public class TeamFragment extends Fragment implements
                     Log.i(TAG, "string added:" + i);
                     mTeam.setWins(s.toString());
                 } catch (NumberFormatException e) {
+                    if (s != null && s!= "")
+                        Toast.makeText(getActivity(), R.string.incorrect_wins_toast, Toast.LENGTH_SHORT).show();
                 }
                 updateTeam();
             }

@@ -23,6 +23,7 @@
     <string name="team_contact_text">Choose Team Coach</string>
     <string name="call_coach_text">Call Team Coach</string>
     <string name="send_report_text">Send Coach a Report</string>
+    <string name="incorrect_wins_toast">Wins must be a number.</string>
 
 
     <string name="team_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>
