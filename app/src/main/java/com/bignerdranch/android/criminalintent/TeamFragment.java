@@ -172,7 +172,7 @@ public class TeamFragment extends Fragment implements
             }
         });
 
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mDateButton = (Button) v.findViewById(R.id.last_played_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +186,7 @@ public class TeamFragment extends Fragment implements
         });
 
 
-        mCubesCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
+        mCubesCheckbox = (CheckBox) v.findViewById(R.id.cubes);
         mCubesCheckbox.setChecked(mTeam.isSolved());
         mCubesCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -196,7 +196,7 @@ public class TeamFragment extends Fragment implements
             }
         });
 
-        mReportButton = (Button) v.findViewById(R.id.crime_report);
+        mReportButton = (Button) v.findViewById(R.id.team_summary);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -208,7 +208,7 @@ public class TeamFragment extends Fragment implements
         });
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        mContactButton = (Button) v.findViewById(R.id.crime_suspect);
+        mContactButton = (Button) v.findViewById(R.id.team_contact);
         mContactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {

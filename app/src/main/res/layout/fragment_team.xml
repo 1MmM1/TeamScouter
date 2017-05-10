@@ -114,7 +114,7 @@
             android:paddingTop="10dp"/>
 
         <CheckBox
-            android:id="@+id/crime_solved"
+            android:id="@+id/cubes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -174,7 +174,7 @@
            android:paddingLeft="20dp"
            android:paddingTop="16dp"/>
        <Button
-            android:id="@+id/crime_date"
+            android:id="@+id/last_played_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -184,7 +184,7 @@
 
     <!--Choose contact-->
     <Button
-        android:id="@+id/crime_suspect"
+        android:id="@+id/team_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -201,7 +201,7 @@
 
     <!--Send report-->
     <Button
-        android:id="@+id/crime_report"
+        android:id="@+id/team_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
