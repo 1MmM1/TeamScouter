@@ -132,9 +132,9 @@ public class Team implements Comparable <Team> {
 
     public int compareTo(Team team) {
         int wins = Integer.parseInt(mWins);
-        int crimeWins = Integer.parseInt(team.mWins);
-        if (wins == crimeWins)
+        int teamWins = Integer.parseInt(team.mWins);
+        if (wins == teamWins)
             return mTitle.compareTo(team.mTitle);
-        return (crimeWins - wins);
+        return (teamWins - wins);
     }
 }
