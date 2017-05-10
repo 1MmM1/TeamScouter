@@ -6,7 +6,7 @@ package com.bignerdranch.android.criminalintent.database;
 
 public class TeamDbSchema {
     public static final class TeamTable {
-        public static final String NAME = "crimes";
+        public static final String NAME = "teams";
 
         public static final class Cols {
             public static final String UUID = "uuid";

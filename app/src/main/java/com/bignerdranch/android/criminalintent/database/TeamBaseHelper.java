@@ -12,7 +12,7 @@ import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
 public class TeamBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "crimeBase.db";
+    private static final String DATABASE_NAME = "teamBase.db";
 
     public TeamBaseHelper(Context context)
     {
