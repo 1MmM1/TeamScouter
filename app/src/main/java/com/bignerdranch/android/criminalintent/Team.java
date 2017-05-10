@@ -8,12 +8,12 @@ import java.util.UUID;
 public class Team implements Comparable <Team> {
 
     private UUID mId;
-    private String mTitle;
+    private String mName;
     private Date mDate;
-    private boolean mSolved;
-    private String mSuspect;
+    private boolean mCubes;
+    private String mContact;
     private int mType;
-    private String number;
+    private String mNumber;
     private String mWins;
     private String mLosses;
     private String mTies;
@@ -33,12 +33,13 @@ public class Team implements Comparable <Team> {
         mWins = "0";
         mTies = "0";
         mLosses = "0";
-        mTitle = "";
+        mName = "";
     }
 
-    public void setNumber(String num) {number = num;}
+    public void setNumber(String num) {
+        mNumber = num;}
 
-    public String getNumber() {return number;}
+    public String getNumber() {return mNumber;}
 
     public void setType(int robotType) {mType = robotType;}
 
@@ -48,12 +49,12 @@ public class Team implements Comparable <Team> {
         return mId;
     }
 
-    public String getTitle() {
-        return mTitle;
+    public String getName() {
+        return mName;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
+    public void setName(String name) {
+        mName = name;
     }
 
     public Date getDate() {
@@ -64,20 +65,20 @@ public class Team implements Comparable <Team> {
         mDate = date;
     }
 
-    public boolean isSolved() {
-        return mSolved;
+    public boolean isCubes() {
+        return mCubes;
     }
 
-    public void setSolved(boolean solved) {
-        mSolved = solved;
+    public void setCubes(boolean cubes) {
+        mCubes = cubes;
     }
 
-    public String getSuspect() {
-        return mSuspect;
+    public String getContact() {
+        return mContact;
     }
 
-    public void setSuspect(String suspect) {
-        mSuspect = suspect;
+    public void setContact(String contact) {
+        mContact = contact;
     }
 
     public String getPhotoFilename()
@@ -134,7 +135,7 @@ public class Team implements Comparable <Team> {
         int wins = Integer.parseInt(mWins);
         int teamWins = Integer.parseInt(team.mWins);
         if (wins == teamWins)
-            return mTitle.compareTo(team.mTitle);
+            return mName.compareTo(team.mName);
         return (teamWins - wins);
     }
 }

@@ -199,7 +199,7 @@ public class TeamListFragment extends Fragment {
 
         public void bindTeam(Team team, int position) {
             mTeam = team;
-            mTitleTextView.setText(mTeam.getTitle());
+            mTitleTextView.setText(mTeam.getName());
             mDateTextView.setText(mTeam.getNumber());
             mWinLossTie.setText(getString(R.string.win_loss_ties, mTeam.getWins(), mTeam.getTies(), mTeam.getLosses()));
             mRanking.setText(getString(R.string.rank, position + ""));

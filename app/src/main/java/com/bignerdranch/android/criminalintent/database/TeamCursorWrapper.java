@@ -35,11 +35,11 @@ public class TeamCursorWrapper extends CursorWrapper {
 
 
         Team team = new Team(UUID.fromString(uuidString));
-        team.setTitle(title);
+        team.setName(title);
         team.setNumber(number);
         team.setDate(new Date(date));
-        team.setSolved(isSolved != 0);
-        team.setSuspect(suspect);
+        team.setCubes(isSolved != 0);
+        team.setContact(suspect);
         team.setWins(wins);
         team.setLosses(losses);
         team.setTies(ties);

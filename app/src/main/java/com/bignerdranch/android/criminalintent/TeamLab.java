@@ -114,10 +114,10 @@ public class TeamLab {
         ContentValues values = new ContentValues();
         values.put(TeamTable.Cols.UUID, team.getId().toString());
         values.put(TeamTable.Cols.NUMBER, team.getNumber());
-        values.put(TeamTable.Cols.TITLE, team.getTitle());
+        values.put(TeamTable.Cols.TITLE, team.getName());
         values.put(TeamTable.Cols.DATE, team.getDate().getTime());
-        values.put(TeamTable.Cols.SOLVED, team.isSolved() ? 1 : 0);
-        values.put(TeamTable.Cols.SUSPECT, team.getSuspect());
+        values.put(TeamTable.Cols.SOLVED, team.isCubes() ? 1 : 0);
+        values.put(TeamTable.Cols.SUSPECT, team.getContact());
         values.put(TeamTable.Cols.WINS, team.getWins());
         values.put(TeamTable.Cols.TIES, team.getTies());
         values.put(TeamTable.Cols.LOSSES, team.getLosses());

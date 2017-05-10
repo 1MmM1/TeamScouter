@@ -134,7 +134,7 @@ public class TeamFragment extends Fragment implements
         final View v = inflater.inflate(R.layout.fragment_team, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.team_name);
-        mTitleField.setText(mTeam.getTitle());
+        mTitleField.setText(mTeam.getName());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,7 +143,7 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTeam.setTitle(s.toString());
+                mTeam.setName(s.toString());
                 updateTeam();
             }
 
@@ -188,11 +188,11 @@ public class TeamFragment extends Fragment implements
 
 
         mCubesCheckbox = (CheckBox) v.findViewById(R.id.cubes);
-        mCubesCheckbox.setChecked(mTeam.isSolved());
+        mCubesCheckbox.setChecked(mTeam.isCubes());
         mCubesCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mTeam.setSolved(isChecked);
+                mTeam.setCubes(isChecked);
                 updateTeam();
             }
         });
@@ -217,9 +217,9 @@ public class TeamFragment extends Fragment implements
             }
         });
 
-        if(mTeam.getSuspect() != null)
+        if(mTeam.getContact() != null)
         {
-            mContactButton.setText(mTeam.getSuspect());
+            mContactButton.setText(mTeam.getContact());
         }
 
         mCallButton = (Button) v.findViewById(R.id.call_contact);
@@ -256,7 +256,7 @@ public class TeamFragment extends Fragment implements
         {
             mContactButton.setEnabled(false);
         }
-        if(mTeam.getSuspect() == null)
+        if(mTeam.getContact() == null)
         {
             mCallButton.setEnabled(false);
         }
@@ -470,7 +470,7 @@ public class TeamFragment extends Fragment implements
                 }
                 c.moveToFirst();
                 String suspect = c.getString(0);
-                mTeam.setSuspect(suspect);
+                mTeam.setContact(suspect);
                 updateTeam();
                 mContactButton.setText(suspect);
                 mCallButton.setEnabled(true);
@@ -560,7 +560,7 @@ public class TeamFragment extends Fragment implements
     private String getTeamSummary()
     {
         String solvedString = null;
-        if(mTeam.isSolved())
+        if(mTeam.isCubes())
         {
             solvedString = getString(R.string.team_report_cubes);
         }
@@ -572,7 +572,7 @@ public class TeamFragment extends Fragment implements
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat, mTeam.getDate()).toString();
 
-        String suspect = mTeam.getSuspect();
+        String suspect = mTeam.getContact();
         if(suspect == null)
         {
             suspect = getString(R.string.team_report_no_contact);
@@ -582,7 +582,7 @@ public class TeamFragment extends Fragment implements
             suspect = getString(R.string.team_report_contact, suspect);
         }
 
-        String report = getString(R.string.team_report, mTeam.getTitle(), dateString, solvedString, suspect);
+        String report = getString(R.string.team_report, mTeam.getName(), dateString, solvedString, suspect);
         return report;
     }
 
