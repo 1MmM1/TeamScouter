@@ -54,11 +54,11 @@ public class TeamListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_team_list, container, false);
 
-        mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
+        mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.team_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mEmptyCrimeView = (LinearLayout) view.findViewById(R.id.empty_crime_view);
-        mCreateButton = (Button) view.findViewById(R.id.create_crime_button);
+        mEmptyCrimeView = (LinearLayout) view.findViewById(R.id.empty_team_view);
+        mCreateButton = (Button) view.findViewById(R.id.create_team_button);
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
