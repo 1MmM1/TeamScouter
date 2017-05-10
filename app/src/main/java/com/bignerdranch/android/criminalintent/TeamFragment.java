@@ -132,7 +132,7 @@ public class TeamFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_team, container, false);
 
-        mTitleField = (EditText) v.findViewById(R.id.crime_title);
+        mTitleField = (EditText) v.findViewById(R.id.team_name);
         mTitleField.setText(mTeam.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -260,7 +260,7 @@ public class TeamFragment extends Fragment implements
             mCallButton.setEnabled(false);
         }
 
-        mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
+        mPhotoButton = (ImageButton) v.findViewById(R.id.team_camera);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         boolean canTakePhoto = (mPhotoFile != null) && (captureImage.resolveActivity(packageManager) != null);
@@ -280,7 +280,7 @@ public class TeamFragment extends Fragment implements
             }
         });
 
-        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        mPhotoView = (ImageView) v.findViewById(R.id.team_photo);
         mPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
