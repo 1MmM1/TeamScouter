@@ -46,7 +46,7 @@ public class TeamPagerActivity extends AppCompatActivity
 
         UUID teamId = (UUID) getIntent().getSerializableExtra(EXTRA_TEAM_ID);
 
-        mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.activity_team_pager_view_pager);
 
         mTeams = TeamLab.get(this).getTeam();
         FragmentManager fragmentManager = getSupportFragmentManager();
