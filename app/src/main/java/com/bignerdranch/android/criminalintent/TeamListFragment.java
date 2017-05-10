@@ -125,7 +125,7 @@ public class TeamListFragment extends Fragment {
     {
         switch(item.getItemId())
         {
-            case(R.id.menu_item_new_crime):
+            case(R.id.menu_item_new_team):
                 createTeam();;
                 return(true);
             case(R.id.menu_item_show_subtitle):

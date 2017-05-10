@@ -518,7 +518,7 @@ public class TeamFragment extends Fragment implements
     {
         switch(item.getItemId())
         {
-            case(R.id.menu_item_delete_crime):
+            case(R.id.menu_item_delete_team):
                 FragmentManager manager = getFragmentManager();
                 DeleteConfirmationFragment dialog = DeleteConfirmationFragment.newInstance();
                 dialog.setTargetFragment(TeamFragment.this, REQUEST_DELETE);
