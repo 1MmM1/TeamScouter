@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
 /**
  * Created by gwc on 3/16/2017.

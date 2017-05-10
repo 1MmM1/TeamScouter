@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.bignerdranch.android.criminalintent.Team;
+import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
 import java.util.Date;
 import java.util.UUID;
