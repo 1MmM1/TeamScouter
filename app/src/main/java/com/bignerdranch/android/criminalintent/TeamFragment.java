@@ -354,7 +354,12 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTeam.setWins(s.toString());
+                try {
+                    int i = Integer.parseInt(s.toString());
+                    Log.i(TAG, "string added:" + i);
+                    mTeam.setWins(s.toString());
+                } catch (NumberFormatException e) {
+                }
                 updateTeam();
             }
 
