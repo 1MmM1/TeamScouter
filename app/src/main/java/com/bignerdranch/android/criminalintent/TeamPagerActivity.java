@@ -48,7 +48,7 @@ public class TeamPagerActivity extends AppCompatActivity
 
         mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
 
-        mTeams = TeamLab.get(this).getCrimes();
+        mTeams = TeamLab.get(this).getTeam();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {

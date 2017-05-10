@@ -108,7 +108,7 @@ public class TeamFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID teamId = (UUID) getArguments().getSerializable(ARG_TEAM_ID);
-        mTeam = TeamLab.get(getActivity()).getCrime(teamId);
+        mTeam = TeamLab.get(getActivity()).getTeam(teamId);
         mPhotoFile = TeamLab.get(getActivity()).getPhotoFile(mTeam);
         setHasOptionsMenu(true);
     }
@@ -118,7 +118,7 @@ public class TeamFragment extends Fragment implements
     {
         super.onPause();
 
-        TeamLab.get(getActivity()).updateCrime(mTeam);
+        TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
     @Override
@@ -482,7 +482,7 @@ public class TeamFragment extends Fragment implements
         if(requestCode == REQUEST_DELETE)
         {
             //should this be changed as well, seeing as we can no longer exit the activity?
-            TeamLab.get(getActivity()).deleteCrime(mTeam);
+            TeamLab.get(getActivity()).deleteTeam(mTeam);
             getActivity().finish();
         }
 
@@ -531,7 +531,7 @@ public class TeamFragment extends Fragment implements
 
     private void updateTeam()
     {
-        TeamLab.get(getActivity()).updateCrime(mTeam);
+        TeamLab.get(getActivity()).updateTeam(mTeam);
         mCallbacks.onTeamUpdated(mTeam);
     }
 

@@ -35,20 +35,20 @@ public class TeamLab {
 
     }
 
-    public void addCrime(Team c)
+    public void addTeam(Team c)
     {
         ContentValues values = getContentValues(c);
 
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    public void deleteCrime(Team c)
+    public void deleteTeam(Team c)
     {
         String uuidString = c.getId().toString();
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{uuidString});
     }
 
-    public ArrayList<Team> getCrimes()
+    public ArrayList<Team> getTeam()
     {
         ArrayList<Team> teams = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class TeamLab {
         return(teams);
     }
 
-    public Team getCrime(UUID id)
+    public Team getTeam(UUID id)
     {
         CrimeCursorWrapper cursor = queryCrimes(CrimeTable.Cols.UUID + " = ?", new String[] { id.toString() });
 
@@ -102,7 +102,7 @@ public class TeamLab {
         return(new File(externalFilesDir, team.getPhotoFilename()));
     }
 
-    public void updateCrime(Team team)
+    public void updateTeam(Team team)
     {
         String uuidString = team.getId().toString();
         ContentValues values = getContentValues(team);
