@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
 import com.bignerdranch.android.criminalintent.database.CrimeBaseHelper;
-import com.bignerdranch.android.criminalintent.database.CrimeCursorWrapper;
+import com.bignerdranch.android.criminalintent.database.TeamCursorWrapper;
 import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
 import java.io.File;
@@ -52,7 +52,7 @@ public class TeamLab {
     {
         ArrayList<Team> teams = new ArrayList<>();
 
-        CrimeCursorWrapper cursor = queryCrimes(null, null);
+        TeamCursorWrapper cursor = queryCrimes(null, null);
 
         try
         {
@@ -73,7 +73,7 @@ public class TeamLab {
 
     public Team getTeam(UUID id)
     {
-        CrimeCursorWrapper cursor = queryCrimes(TeamTable.Cols.UUID + " = ?", new String[] { id.toString() });
+        TeamCursorWrapper cursor = queryCrimes(TeamTable.Cols.UUID + " = ?", new String[] { id.toString() });
 
         try
         {
@@ -127,9 +127,9 @@ public class TeamLab {
         return(values);
     }
 
-    private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs)
+    private TeamCursorWrapper queryCrimes(String whereClause, String[] whereArgs)
     {
         Cursor cursor = mDatabase.query(TeamTable.NAME, null, whereClause, whereArgs, null, null, null);
-        return(new CrimeCursorWrapper(cursor));
+        return(new TeamCursorWrapper(cursor));
     }
 }

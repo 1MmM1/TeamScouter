@@ -13,8 +13,8 @@ import java.util.UUID;
  * Created by gwc on 3/16/2017.
  */
 
-public class CrimeCursorWrapper extends CursorWrapper {
-    public CrimeCursorWrapper(Cursor cursor) {
+public class TeamCursorWrapper extends CursorWrapper {
+    public TeamCursorWrapper(Cursor cursor) {
         super(cursor);
     }
 
