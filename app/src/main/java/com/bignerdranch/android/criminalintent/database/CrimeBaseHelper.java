@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bignerdranch.android.criminalintent.database.CrimeDbSchema.CrimeTable;
 
 /**
  * Created by gwc on 3/16/2017.
@@ -22,13 +21,13 @@ public class CrimeBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("create table " + CrimeTable.NAME + "(" +
-                    CrimeTable.Cols.UUID + ", " + CrimeTable.Cols.TITLE + ", " +
-                    CrimeTable.Cols.NUMBER + ", " + CrimeTable.Cols.DATE + ", " +
-                    CrimeTable.Cols.SOLVED + ", " + CrimeTable.Cols.SUSPECT + ", " +
-                    CrimeTable.Cols.WINS + ", " + CrimeTable.Cols.LOSSES + ", " +
-                    CrimeTable.Cols.TIES + ", " + CrimeTable.Cols.DISQUALS + "," +
-                    CrimeTable.Cols.TYPE + ", " + CrimeTable.Cols.HANG + ")");
+        db.execSQL("create table " + TeamTable.NAME + "(" +
+                    TeamTable.Cols.UUID + ", " + TeamTable.Cols.TITLE + ", " +
+                    TeamTable.Cols.NUMBER + ", " + TeamTable.Cols.DATE + ", " +
+                    TeamTable.Cols.SOLVED + ", " + TeamTable.Cols.SUSPECT + ", " +
+                    TeamTable.Cols.WINS + ", " + TeamTable.Cols.LOSSES + ", " +
+                    TeamTable.Cols.TIES + ", " + TeamTable.Cols.DISQUALS + "," +
+                    TeamTable.Cols.TYPE + ", " + TeamTable.Cols.HANG + ")");
     }
 
     @Override

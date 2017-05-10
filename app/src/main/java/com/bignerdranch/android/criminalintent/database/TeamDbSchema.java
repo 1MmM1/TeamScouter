@@ -4,8 +4,8 @@ package com.bignerdranch.android.criminalintent.database;
  * Created by gwc on 3/16/2017.
  */
 
-public class CrimeDbSchema {
-    public static final class CrimeTable {
+public class TeamDbSchema {
+    public static final class TeamTable {
         public static final String NAME = "crimes";
 
         public static final class Cols {
