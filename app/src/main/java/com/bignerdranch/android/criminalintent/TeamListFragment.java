@@ -23,10 +23,10 @@ public class TeamListFragment extends Fragment {
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
-    private RecyclerView mCrimeRecyclerView;
-    private CrimeAdapter mAdapter;
+    private RecyclerView mTeamRecyclerView;
+    private TeamAdapter mAdapter;
     private boolean mSubtitleVisible;
-    private LinearLayout mEmptyCrimeView;
+    private LinearLayout mEmptyTeamView;
     private Button mCreateButton;
     private Callbacks mCallbacks;
 
@@ -54,15 +54,15 @@ public class TeamListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_team_list, container, false);
 
-        mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.team_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mTeamRecyclerView = (RecyclerView) view.findViewById(R.id.team_recycler_view);
+        mTeamRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mEmptyCrimeView = (LinearLayout) view.findViewById(R.id.empty_team_view);
+        mEmptyTeamView = (LinearLayout) view.findViewById(R.id.empty_team_view);
         mCreateButton = (Button) view.findViewById(R.id.create_team_button);
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createCrime();
+                createTeam();
             }
         });
 
@@ -76,7 +76,7 @@ public class TeamListFragment extends Fragment {
         return view;
     }
 
-    private void createCrime() {
+    private void createTeam() {
         Team team = new Team();
         TeamLab.get(getActivity()).addTeam(team);
         updateUI();
@@ -126,7 +126,7 @@ public class TeamListFragment extends Fragment {
         switch(item.getItemId())
         {
             case(R.id.menu_item_new_crime):
-                createCrime();;
+                createTeam();;
                 return(true);
             case(R.id.menu_item_show_subtitle):
                 mSubtitleVisible = !mSubtitleVisible;
@@ -143,8 +143,8 @@ public class TeamListFragment extends Fragment {
         TeamLab teamLab = TeamLab.get(getActivity());
 //        int crimeCount = teamLab.getTeam().size();
 //        String subtitle = getString(R.string.subtitle_format, crimeCount);
-        int crimeSize = teamLab.getTeam().size();
-        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
+        int teamSize = teamLab.getTeam().size();
+        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, teamSize, teamSize);
 
         if(!mSubtitleVisible)
         {
@@ -160,16 +160,16 @@ public class TeamListFragment extends Fragment {
         ArrayList<Team> teams = teamLab.getTeam();
         if(teams.size() == 0)
         {
-            mEmptyCrimeView.setVisibility(View.VISIBLE);
+            mEmptyTeamView.setVisibility(View.VISIBLE);
         }
         else
         {
-            mEmptyCrimeView.setVisibility(View.GONE);
+            mEmptyTeamView.setVisibility(View.GONE);
         }
 
         if(mAdapter == null) {
-            mAdapter = new CrimeAdapter(teams);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mAdapter = new TeamAdapter(teams);
+            mTeamRecyclerView.setAdapter(mAdapter);
         }
         else
         {
@@ -183,7 +183,7 @@ public class TeamListFragment extends Fragment {
         updateSubtitle();
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class TeamHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
@@ -193,7 +193,7 @@ public class TeamListFragment extends Fragment {
 
         private Team mTeam;
 
-        public CrimeHolder(View itemView) {
+        public TeamHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
@@ -212,7 +212,7 @@ public class TeamListFragment extends Fragment {
 //            });
         }
 
-        public void bindCrime(Team team, int position) {
+        public void bindTeam(Team team, int position) {
             mTeam = team;
             mTitleTextView.setText(mTeam.getTitle());
             mDateTextView.setText(mTeam.getNumber());
@@ -226,26 +226,26 @@ public class TeamListFragment extends Fragment {
         }
     }
 
-    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
-        private static final String TAG = "CrimeAdapter";
+    private class TeamAdapter extends RecyclerView.Adapter<TeamHolder> {
+        private static final String TAG = "TeamAdapter";
 
         private List<Team> mTeams;
 
-        public CrimeAdapter(List<Team> teams) {
+        public TeamAdapter(List<Team> teams) {
             mTeams = teams;
         }
 
         @Override
-        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public TeamHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_item_team, parent, false);
-            return new CrimeHolder(view);
+            return new TeamHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
+        public void onBindViewHolder(TeamHolder holder, int position) {
             Team team = mTeams.get(position);
-            holder.bindCrime(team, position + 1);
+            holder.bindTeam(team, position + 1);
         }
 
         @Override
