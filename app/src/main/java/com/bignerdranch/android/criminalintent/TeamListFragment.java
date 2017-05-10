@@ -197,8 +197,8 @@ public class TeamListFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
-            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_team_name_text_view);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_team_number_text_view);
             mWinLossTie = (TextView) itemView.findViewById(R.id.list_item_win_loss_tie_text_view);
             mRanking = (TextView) itemView.findViewById(R.id.team_rank_text_view);
             // The checkbox was changed to a text view so we still have to write the code for that
