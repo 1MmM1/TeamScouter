@@ -12,7 +12,7 @@ public class TeamListActivity extends SingleFragmentActivity
     }
 
     @Override
-    public void onCrimeUpdated(Team team)
+    public void onTeamUpdated(Team team)
     {
         TeamListFragment listFragment = (TeamListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         listFragment.updateUI();

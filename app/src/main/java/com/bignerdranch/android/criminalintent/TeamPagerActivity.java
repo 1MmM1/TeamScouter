@@ -33,7 +33,7 @@ public class TeamPagerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCrimeUpdated(Team team)
+    public void onTeamUpdated(Team team)
     {
 
     }

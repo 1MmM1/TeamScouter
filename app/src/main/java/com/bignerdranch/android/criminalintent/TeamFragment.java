@@ -45,7 +45,7 @@ public class TeamFragment extends Fragment implements
 
     private static final String TAG = "TeamFragment";
 
-    private static final String ARG_CRIME_ID = "crime_id";
+    private static final String ARG_TEAM_ID = "team_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_DELETE = "DialogDelete";
     private static final String DIALOG_PICTURE = "DialogPicture";
@@ -85,12 +85,12 @@ public class TeamFragment extends Fragment implements
 
     public interface Callbacks
     {
-        void onCrimeUpdated(Team team);
+        void onTeamUpdated(Team team);
     }
 
-    public static TeamFragment newInstance(UUID crimeId) {
+    public static TeamFragment newInstance(UUID teamId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(ARG_TEAM_ID, teamId);
 
         TeamFragment fragment = new TeamFragment();
         fragment.setArguments(args);
@@ -107,8 +107,8 @@ public class TeamFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mTeam = TeamLab.get(getActivity()).getCrime(crimeId);
+        UUID teamId = (UUID) getArguments().getSerializable(ARG_TEAM_ID);
+        mTeam = TeamLab.get(getActivity()).getCrime(teamId);
         mPhotoFile = TeamLab.get(getActivity()).getPhotoFile(mTeam);
         setHasOptionsMenu(true);
     }
@@ -532,7 +532,7 @@ public class TeamFragment extends Fragment implements
     private void updateTeam()
     {
         TeamLab.get(getActivity()).updateCrime(mTeam);
-        mCallbacks.onCrimeUpdated(mTeam);
+        mCallbacks.onTeamUpdated(mTeam);
     }
 
     private void updateDate() {
