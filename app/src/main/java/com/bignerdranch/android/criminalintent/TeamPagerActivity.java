@@ -20,15 +20,15 @@ public class TeamPagerActivity extends AppCompatActivity
         implements TeamFragment.Callbacks
 {
 
-    private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
+    private static final String EXTRA_TEAM_ID = "com.bignerdranch.android.criminalintent.team_id";
 
     private ViewPager mViewPager;
     private List<Team> mTeams;
 
-    public static Intent newIntent(Context packageContext, UUID crimeId)
+    public static Intent newIntent(Context packageContext, UUID teamId)
     {
         Intent intent = new Intent(packageContext, TeamPagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_TEAM_ID, teamId);
         return intent;
     }
 
@@ -44,7 +44,7 @@ public class TeamPagerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_pager);
 
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        UUID teamId = (UUID) getIntent().getSerializableExtra(EXTRA_TEAM_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
 
@@ -66,7 +66,7 @@ public class TeamPagerActivity extends AppCompatActivity
 
         for(int i = 0; i < mTeams.size(); i++)
         {
-            if(mTeams.get(i).getId().equals(crimeId))
+            if(mTeams.get(i).getId().equals(teamId))
             {
                 mViewPager.setCurrentItem(i);
                 break;
