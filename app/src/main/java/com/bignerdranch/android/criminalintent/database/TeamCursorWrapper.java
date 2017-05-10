@@ -18,7 +18,7 @@ public class TeamCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
-    public Team getCrime()
+    public Team getTeam()
     {
         String uuidString = getString(getColumnIndex(TeamTable.Cols.UUID));
         String title = getString(getColumnIndex(TeamTable.Cols.TITLE));

@@ -52,14 +52,14 @@ public class TeamLab {
     {
         ArrayList<Team> teams = new ArrayList<>();
 
-        TeamCursorWrapper cursor = queryCrimes(null, null);
+        TeamCursorWrapper cursor = queryTeams(null, null);
 
         try
         {
             cursor.moveToFirst();
             while(!cursor.isAfterLast())
             {
-                teams.add(cursor.getCrime());
+                teams.add(cursor.getTeam());
                 cursor.moveToNext();
             }
         }
@@ -73,7 +73,7 @@ public class TeamLab {
 
     public Team getTeam(UUID id)
     {
-        TeamCursorWrapper cursor = queryCrimes(TeamTable.Cols.UUID + " = ?", new String[] { id.toString() });
+        TeamCursorWrapper cursor = queryTeams(TeamTable.Cols.UUID + " = ?", new String[] { id.toString() });
 
         try
         {
@@ -82,7 +82,7 @@ public class TeamLab {
                 return null;
             }
             cursor.moveToFirst();
-            return(cursor.getCrime());
+            return(cursor.getTeam());
         }
         finally
         {
@@ -127,7 +127,7 @@ public class TeamLab {
         return(values);
     }
 
-    private TeamCursorWrapper queryCrimes(String whereClause, String[] whereArgs)
+    private TeamCursorWrapper queryTeams(String whereClause, String[] whereArgs)
     {
         Cursor cursor = mDatabase.query(TeamTable.NAME, null, whereClause, whereArgs, null, null, null);
         return(new TeamCursorWrapper(cursor));

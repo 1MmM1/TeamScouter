@@ -591,7 +591,16 @@ public class TeamFragment extends Fragment implements
         }
         else
         {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x, mPhotoViewSize.y);
+            Bitmap bitmap;
+            try
+            {
+                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x, mPhotoViewSize.y);
+            }
+            catch(NullPointerException npe)
+            {
+                Log.e(TAG, "Hit NullPointerException");
+                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            }
             mPhotoView.setImageBitmap(bitmap);
         }
     }
