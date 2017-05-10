@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
-import com.bignerdranch.android.criminalintent.database.CrimeBaseHelper;
+import com.bignerdranch.android.criminalintent.database.TeamBaseHelper;
 import com.bignerdranch.android.criminalintent.database.TeamCursorWrapper;
 import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
@@ -31,7 +31,7 @@ public class TeamLab {
     private TeamLab(Context context)
     {
         mContext = context.getApplicationContext();
-        mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new TeamBaseHelper(mContext).getWritableDatabase();
 
     }
 
