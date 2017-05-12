@@ -355,15 +355,34 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    int i = Integer.parseInt(s.toString());
-                    Log.i(TAG, "string added:" + i);
-                    mTeam.setWins(s.toString());
-                } catch (NumberFormatException e) {
-                    if (s != null && s!= "")
-                        Toast.makeText(getActivity(), R.string.incorrect_wins_toast, Toast.LENGTH_SHORT).show();
+                if(s == null || s.toString().equals(""))
+                {
+                    mWins.setText(mTeam.getWins());
+                    Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
                 }
-                updateTeam();
+                else
+                {
+                    mTeam.setWins(s.toString());
+                    updateTeam();
+                }
+//                try {
+//                    int i = Integer.parseInt(s.toString());
+//                    Log.i(TAG, "string added:" + i);
+//                    mTeam.setWins(s.toString());
+//                } catch (NumberFormatException nfe) {
+//                    Log.i(TAG, "Hit error, wins = " + mTeam.getWins());
+//                    mWins.setText(mTeam.getWins());
+//                    if (s != null) {
+//                        if(s == "")
+//                        {
+//                            Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(getActivity(), R.string.incorrect_wins_toast, Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
+//                updateTeam();
             }
 
             @Override
