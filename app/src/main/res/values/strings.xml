@@ -7,7 +7,7 @@
     <string name="team_number_label">Team Number</string>
     <string name="team_name_label">Team Name</string>
     <string name="team_details_label">Details</string>
-    <string name="robot_type_label">Type of Robot</string>
+    <string name="robot_type_label">Type of Robot:</string>
     <string name="date_picker_title">Last Date Played:</string>
     <string name="new_team">New Team</string>
     <string name="delete_team">Delete Team</string>
@@ -47,7 +47,7 @@
         <item>Defensive</item>
     </string-array>
 
-    <string name="disquals_title">Disqualifications"</string>
+    <string name="disquals_title">Disqualifications:</string>
     <string name="disquals_text">%1$s</string>
     <string name="win_loss_ties">%1$s - %2$s - %3$s</string>
     <string name="rank">%1$s</string>
