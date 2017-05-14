@@ -214,7 +214,7 @@ public class TeamListFragment extends Fragment {
             //we might want to use getAdapterPosition instead of position (it was suggested in the documentation)
             mRanking.setText(getString(R.string.rank, position + ""));
             if (position % 2 != 1)
-                mTeamList.setBackgroundColor(Color.GRAY);
+                mTeamList.setBackgroundColor(Color.rgb(186, 236, 255));
             else
                 mTeamList.setBackgroundColor(Color.WHITE);
         }

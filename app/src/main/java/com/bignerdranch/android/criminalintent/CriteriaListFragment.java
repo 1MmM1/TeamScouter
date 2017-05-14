@@ -87,7 +87,7 @@ public class CriteriaListFragment extends Fragment{
             mCriteriaName.setText(getString(R.string.criteria_name_text, criteria));
             mCriteriaType.setText(getString(R.string.criteria_name_text, Team.criteriaList.get(criteria)));
             if (position % 2 == 1)
-                mCriteriaList.setBackgroundColor(Color.GRAY);
+                mCriteriaList.setBackgroundColor(Color.rgb(186, 236, 255));
             else
                 mCriteriaList.setBackgroundColor(Color.WHITE);
         }
