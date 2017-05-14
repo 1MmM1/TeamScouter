@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="16dp"
-              android:layout_marginTop="16dp">
+
+              android:background="@color/bright_blue">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="4dp">
 
         <ImageView
@@ -16,7 +18,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerInside"
-            android:background="@android:color/darker_gray"
+            android:background="@color/dark_gray"
             android:cropToPadding="true"/>
 
         <ImageButton
@@ -31,7 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp">
 
         <EditText
             android:id="@+id/team_name"
