@@ -121,6 +121,19 @@ public class TeamFragment extends Fragment implements
         mTeam.setTies(checkForLeadingZeroes(mTeam.getTies()));
         mTeam.setLosses(checkForLeadingZeroes(mTeam.getLosses()));
 
+        if(mTeam.getWins() == null || mTeam.getWins().equals(""))
+        {
+            mTeam.setWins("0");
+        }
+        if(mTeam.getTies() == null || mTeam.getTies().equals(""))
+        {
+            mTeam.setTies("0");
+        }
+        if(mTeam.getLosses() == null || mTeam.getLosses().equals(""))
+        {
+            mTeam.setLosses("0");
+        }
+
         TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
@@ -357,16 +370,8 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s == null || s.toString().equals(""))
-                {
-                    mWins.setText(mTeam.getWins());
-                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Wins"), Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    mTeam.setWins(s.toString());
-                    updateTeam();
-                }
+                mTeam.setWins(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -385,16 +390,8 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s == null || s.toString().equals(""))
-                {
-                    mLosses.setText(mTeam.getLosses());
-                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Losses"), Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    mTeam.setLosses(s.toString());
-                    updateTeam();
-                }
+                mTeam.setLosses(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -413,15 +410,8 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s == null || s.toString().equals(""))
-                {
-                    mTies.setText(mTeam.getTies());
-                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Ties"), Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    mTeam.setTies(s.toString());
-                    updateTeam();
-                }
+                mTeam.setTies(s.toString());
+                updateTeam();
             }
 
             @Override

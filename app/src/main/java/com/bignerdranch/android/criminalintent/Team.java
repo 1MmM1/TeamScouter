@@ -135,8 +135,23 @@ public class Team implements Comparable <Team> {
     public int compareTo(Team team) {
         int wins = Integer.parseInt(mWins);
         int teamWins = Integer.parseInt(team.mWins);
-        if (wins == teamWins)
-            return mName.compareTo(team.mName);
+        if (wins == teamWins) {
+            int ties = Integer.parseInt(mTies);
+            int teamTies = Integer.parseInt(team.mTies);
+            if(ties == teamTies)
+            {
+                int losses = Integer.parseInt(mLosses);
+                int teamLosses = Integer.parseInt(team.mLosses);
+                if(losses == teamLosses) {
+                    if (mName.equals("")) {
+                        return (1);
+                    }
+                    return mName.compareTo(team.mName);
+                }
+                return (losses - teamLosses);
+            }
+            return (teamTies - ties);
+        }
         return (teamWins - wins);
     }
 }
