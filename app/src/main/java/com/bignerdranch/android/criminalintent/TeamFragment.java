@@ -116,24 +116,6 @@ public class TeamFragment extends Fragment implements
     public void onPause()
     {
         super.onPause();
-
-        mTeam.setWins(checkForLeadingZeroes(mTeam.getWins()));
-        mTeam.setTies(checkForLeadingZeroes(mTeam.getTies()));
-        mTeam.setLosses(checkForLeadingZeroes(mTeam.getLosses()));
-
-        if(mTeam.getWins() == null || mTeam.getWins().equals(""))
-        {
-            mTeam.setWins("0");
-        }
-        if(mTeam.getTies() == null || mTeam.getTies().equals(""))
-        {
-            mTeam.setTies("0");
-        }
-        if(mTeam.getLosses() == null || mTeam.getLosses().equals(""))
-        {
-            mTeam.setLosses("0");
-        }
-
         TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
@@ -546,6 +528,22 @@ public class TeamFragment extends Fragment implements
 
     private void updateTeam()
     {
+        mTeam.setWins(checkForLeadingZeroes(mTeam.getWins()));
+        mTeam.setTies(checkForLeadingZeroes(mTeam.getTies()));
+        mTeam.setLosses(checkForLeadingZeroes(mTeam.getLosses()));
+
+        if(mTeam.getWins() == null || mTeam.getWins().equals(""))
+        {
+            mTeam.setWins("0");
+        }
+        if(mTeam.getTies() == null || mTeam.getTies().equals(""))
+        {
+            mTeam.setTies("0");
+        }
+        if(mTeam.getLosses() == null || mTeam.getLosses().equals(""))
+        {
+            mTeam.setLosses("0");
+        }
         TeamLab.get(getActivity()).updateTeam(mTeam);
         mCallbacks.onTeamUpdated(mTeam);
     }
