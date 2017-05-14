@@ -1,21 +1,19 @@
 package com.bignerdranch.android.criminalintent;
 
-import android.widget.Spinner;
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class Crime implements Comparable <Crime> {
+public class Team implements Comparable <Team> {
 
     private UUID mId;
-    private String mTitle;
+    private String mName;
     private Date mDate;
-    private boolean mSolved;
-    private String mSuspect;
+    private boolean mCubes;
+    private String mContact;
     private int mType;
-    private String number;
+    private String mNumber;
     private String mWins;
     private String mLosses;
     private String mTies;
@@ -24,23 +22,24 @@ public class Crime implements Comparable <Crime> {
 
     public static final List<String> hangingTypes = Arrays.asList("None", "Low", "High");
 
-    public Crime() {
+    public Team() {
         this(UUID.randomUUID());
     }
 
-    public Crime(UUID id)
+    public Team(UUID id)
     {
         mId = id;
         mDate = new Date();
         mWins = "0";
         mTies = "0";
         mLosses = "0";
-        mTitle = "";
+        mName = "";
     }
 
-    public void setNumber(String num) {number = num;}
+    public void setNumber(String num) {
+        mNumber = num;}
 
-    public String getNumber() {return number;}
+    public String getNumber() {return mNumber;}
 
     public void setType(int robotType) {mType = robotType;}
 
@@ -50,12 +49,12 @@ public class Crime implements Comparable <Crime> {
         return mId;
     }
 
-    public String getTitle() {
-        return mTitle;
+    public String getName() {
+        return mName;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
+    public void setName(String name) {
+        mName = name;
     }
 
     public Date getDate() {
@@ -66,20 +65,20 @@ public class Crime implements Comparable <Crime> {
         mDate = date;
     }
 
-    public boolean isSolved() {
-        return mSolved;
+    public boolean isCubes() {
+        return mCubes;
     }
 
-    public void setSolved(boolean solved) {
-        mSolved = solved;
+    public void setCubes(boolean cubes) {
+        mCubes = cubes;
     }
 
-    public String getSuspect() {
-        return mSuspect;
+    public String getContact() {
+        return mContact;
     }
 
-    public void setSuspect(String suspect) {
-        mSuspect = suspect;
+    public void setContact(String contact) {
+        mContact = contact;
     }
 
     public String getPhotoFilename()
@@ -132,11 +131,11 @@ public class Crime implements Comparable <Crime> {
         return(hangingTypes.get(mHang));
     }
 
-    public int compareTo(Crime crime) {
+    public int compareTo(Team team) {
         int wins = Integer.parseInt(mWins);
-        int crimeWins = Integer.parseInt(crime.mWins);
-        if (wins == crimeWins)
-            return mTitle.compareTo(crime.mTitle);
-        return (crimeWins - wins);
+        int teamWins = Integer.parseInt(team.mWins);
+        if (wins == teamWins)
+            return mName.compareTo(team.mName);
+        return (teamWins - wins);
     }
 }

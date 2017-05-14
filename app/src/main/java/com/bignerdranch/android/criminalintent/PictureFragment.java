@@ -38,7 +38,7 @@ public class PictureFragment extends DialogFragment
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_photo, null);
 
         mPhotoFile = (File) getArguments().getSerializable(ARG_FILE);
-        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo_zoom);
+        mPhotoView = (ImageView) v.findViewById(R.id.team_photo_zoom);
 
         if(mPhotoFile == null || !mPhotoFile.exists())
         {

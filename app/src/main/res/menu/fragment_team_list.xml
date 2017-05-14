@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_item_new_crime"
-        android:icon="@drawable/ic_menu_add"
-        android:title="@string/new_crime"
+        android:id="@+id/menu_item_new_team"
+        android:icon="@drawable/ic_add_list_button"
+        android:title="@string/new_team"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/menu_item_show_subtitle"
         android:title="@string/show_subtitle"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_item_criteria_list"
+        android:title="@string/criteria_list"
         app:showAsAction="ifRoom" />
 </menu>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,24 +16,24 @@ import java.util.UUID;
  * Created by gwc on 3/4/2017.
  */
 
-public class CrimePagerActivity extends AppCompatActivity
-        implements CrimeFragment.Callbacks
+public class TeamPagerActivity extends AppCompatActivity
+        implements TeamFragment.Callbacks
 {
 
-    private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
+    private static final String EXTRA_TEAM_ID = "com.bignerdranch.android.criminalintent.team_id";
 
     private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    private List<Team> mTeams;
 
-    public static Intent newIntent(Context packageContext, UUID crimeId)
+    public static Intent newIntent(Context packageContext, UUID teamId)
     {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        Intent intent = new Intent(packageContext, TeamPagerActivity.class);
+        intent.putExtra(EXTRA_TEAM_ID, teamId);
         return intent;
     }
 
     @Override
-    public void onCrimeUpdated(Crime crime)
+    public void onTeamUpdated(Team team)
     {
 
     }
@@ -43,31 +42,31 @@ public class CrimePagerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
+        setContentView(R.layout.activity_team_pager);
 
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        UUID teamId = (UUID) getIntent().getSerializableExtra(EXTRA_TEAM_ID);
 
-        mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.activity_team_pager_view_pager);
 
-        mCrimes = CrimeLab.get(this).getCrimes();
+        mTeams = TeamLab.get(this).getTeam();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+                Team team = mTeams.get(position);
+                return TeamFragment.newInstance(team.getId());
             }
 
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mTeams.size();
             }
         });
 
-        for(int i = 0; i < mCrimes.size(); i++)
+        for(int i = 0; i < mTeams.size(); i++)
         {
-            if(mCrimes.get(i).getId().equals(crimeId))
+            if(mTeams.get(i).getId().equals(teamId))
             {
                 mViewPager.setCurrentItem(i);
                 break;

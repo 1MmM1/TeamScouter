@@ -34,18 +34,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
 import java.io.File;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment implements
+public class TeamFragment extends Fragment implements
         AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = "CrimeFragment";
+    private static final String TAG = "TeamFragment";
 
-    private static final String ARG_CRIME_ID = "crime_id";
+    private static final String ARG_TEAM_ID = "team_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_DELETE = "DialogDelete";
     private static final String DIALOG_PICTURE = "DialogPicture";
@@ -57,21 +58,20 @@ public class CrimeFragment extends Fragment implements
     private static final int REQUEST_ZOOM = 200;
     private static final int REQUEST_HANG = 300;
 
-    private Crime mCrime;
+    private Team mTeam;
     private File mPhotoFile;
     private EditText mTitleField;
     private EditText mNumberField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckbox;
+    private CheckBox mCubesCheckbox;
     private TextView mDisquals;
     private Button mReportButton;
-    private Button mSuspectButton;
+    private Button mContactButton;
     private Button mCallButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private Point mPhotoViewSize;
     private Callbacks mCallbacks;
-    private Date mDate;
     private EditText mWins;
     private EditText mLosses;
     private EditText mTies;
@@ -79,20 +79,19 @@ public class CrimeFragment extends Fragment implements
     private Button mHangButton;
     private ImageButton mPlusButton;
     private ImageButton mSubtractButton;
-//    private SeekBar mHanging;
 
     private int teamId;
 
     public interface Callbacks
     {
-        void onCrimeUpdated(Crime crime);
+        void onTeamUpdated(Team team);
     }
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static TeamFragment newInstance(UUID teamId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(ARG_TEAM_ID, teamId);
 
-        CrimeFragment fragment = new CrimeFragment();
+        TeamFragment fragment = new TeamFragment();
         fragment.setArguments(args);
         return(fragment);
     }
@@ -107,9 +106,9 @@ public class CrimeFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
-        mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
+        UUID teamId = (UUID) getArguments().getSerializable(ARG_TEAM_ID);
+        mTeam = TeamLab.get(getActivity()).getTeam(teamId);
+        mPhotoFile = TeamLab.get(getActivity()).getPhotoFile(mTeam);
         setHasOptionsMenu(true);
     }
 
@@ -118,7 +117,7 @@ public class CrimeFragment extends Fragment implements
     {
         super.onPause();
 
-        CrimeLab.get(getActivity()).updateCrime(mCrime);
+        TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
     @Override
@@ -130,10 +129,10 @@ public class CrimeFragment extends Fragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        final View v = inflater.inflate(R.layout.fragment_team, container, false);
 
-        mTitleField = (EditText) v.findViewById(R.id.crime_title);
-        mTitleField.setText(mCrime.getTitle());
+        mTitleField = (EditText) v.findViewById(R.id.team_name);
+        mTitleField.setText(mTeam.getName());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,8 +141,8 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString());
-                updateCrime();
+                mTeam.setName(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -153,7 +152,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mNumberField = (EditText) v.findViewById(R.id.team_number);
-        mNumberField.setText(mCrime.getNumber());
+        mNumberField.setText(mTeam.getNumber());
         mNumberField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -162,8 +161,8 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setNumber(s.toString());
-                updateCrime();
+                mTeam.setNumber(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -172,53 +171,53 @@ public class CrimeFragment extends Fragment implements
             }
         });
 
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mDateButton = (Button) v.findViewById(R.id.last_played_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 FragmentManager manager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mTeam.getDate());
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
                 updateDate();            }
         });
 
 
-        mSolvedCheckbox = (CheckBox) v.findViewById(R.id.crime_solved);
-        mSolvedCheckbox.setChecked(mCrime.isSolved());
-        mSolvedCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mCubesCheckbox = (CheckBox) v.findViewById(R.id.cubes);
+        mCubesCheckbox.setChecked(mTeam.isCubes());
+        mCubesCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mCrime.setSolved(isChecked);
-                updateCrime();
+                mTeam.setCubes(isChecked);
+                updateTeam();
             }
         });
 
-        mReportButton = (Button) v.findViewById(R.id.crime_report);
+        mReportButton = (Button) v.findViewById(R.id.team_summary);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent i = ShareCompat.IntentBuilder.from(getActivity()).setType("text/plain").setText(getCrimeReport())
-                        .setSubject(getString(R.string.crime_report_subject)).getIntent();
+                Intent i = ShareCompat.IntentBuilder.from(getActivity()).setType("text/plain").setText(getTeamSummary())
+                        .setSubject(getString(R.string.team_report_subject)).getIntent();
                 i = Intent.createChooser(i, getString(R.string.send_report));
                 startActivity(i);
             }
         });
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
-        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+        mContactButton = (Button) v.findViewById(R.id.team_contact);
+        mContactButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
 
-        if(mCrime.getSuspect() != null)
+        if(mTeam.getContact() != null)
         {
-            mSuspectButton.setText(mCrime.getSuspect());
+            mContactButton.setText(mTeam.getContact());
         }
 
         mCallButton = (Button) v.findViewById(R.id.call_contact);
@@ -253,14 +252,14 @@ public class CrimeFragment extends Fragment implements
         PackageManager packageManager = getActivity().getPackageManager();
         if(packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null)
         {
-            mSuspectButton.setEnabled(false);
+            mContactButton.setEnabled(false);
         }
-        if(mCrime.getSuspect() == null)
+        if(mTeam.getContact() == null)
         {
             mCallButton.setEnabled(false);
         }
 
-        mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
+        mPhotoButton = (ImageButton) v.findViewById(R.id.team_camera);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         boolean canTakePhoto = (mPhotoFile != null) && (captureImage.resolveActivity(packageManager) != null);
@@ -280,14 +279,14 @@ public class CrimeFragment extends Fragment implements
             }
         });
 
-        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        mPhotoView = (ImageView) v.findViewById(R.id.team_photo);
         mPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 FragmentManager manager = getFragmentManager();
                 PictureFragment dialog = PictureFragment.newInstance(mPhotoFile);
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_ZOOM);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_ZOOM);
                 dialog.show(manager, DIALOG_PICTURE);
             }
         });
@@ -310,19 +309,19 @@ public class CrimeFragment extends Fragment implements
             @Override
             public void onClick(View v)
             {
-                mCrime.setDisquals(mCrime.getDisquals() + 1);
-                if (mCrime.getDisquals() > 0)
+                mTeam.setDisquals(mTeam.getDisquals() + 1);
+                if (mTeam.getDisquals() > 0)
                 {
                     mSubtractButton.setEnabled(true);
                 }
                 updateDisquals();
-                updateCrime();
-                Log.i(TAG, "Added one: " + mCrime.getDisquals());
+                updateTeam();
+                Log.i(TAG, "Added one: " + mTeam.getDisquals());
             }
         });
 
         mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
-        Log.i(TAG, "Firt Pass: " + mCrime.getDisquals());
+        Log.i(TAG, "Firt Pass: " + mTeam.getDisquals());
         updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
@@ -330,22 +329,22 @@ public class CrimeFragment extends Fragment implements
             @Override
             public void onClick(View v)
             {
-                mCrime.setDisquals(mCrime.getDisquals() - 1);
+                mTeam.setDisquals(mTeam.getDisquals() - 1);
 
-                if(mCrime.getDisquals() <= 0)
+                if(mTeam.getDisquals() <= 0)
                 {
-                    mCrime.setDisquals(0);
+                    mTeam.setDisquals(0);
                     mSubtractButton.setEnabled(false);
                 }
                 updateDisquals();
-                updateCrime();
-                Log.i(TAG, "Subtracted one: " + mCrime.getDisquals());
+                updateTeam();
+                Log.i(TAG, "Subtracted one: " + mTeam.getDisquals());
             }
         });
 
 
         mWins = (EditText) v.findViewById(R.id.wins);
-        mWins.setText(mCrime.getWins());
+        mWins.setText(mTeam.getWins());
         mWins.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -354,8 +353,16 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setWins(s.toString());
-                updateCrime();
+                if(s == null || s.toString().equals(""))
+                {
+                    mWins.setText(mTeam.getWins());
+                    Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    mTeam.setWins(s.toString());
+                    updateTeam();
+                }
             }
 
             @Override
@@ -365,7 +372,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mLosses = (EditText) v.findViewById(R.id.losses);
-        mLosses.setText(mCrime.getLosses());
+        mLosses.setText(mTeam.getLosses());
         mLosses.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -374,8 +381,8 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setLosses(s.toString());
-                updateCrime();
+                mTeam.setLosses(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -385,7 +392,7 @@ public class CrimeFragment extends Fragment implements
         });
 
         mTies = (EditText) v.findViewById(R.id.ties);
-        mTies.setText(mCrime.getTies());
+        mTies.setText(mTeam.getTies());
         mTies.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -394,8 +401,8 @@ public class CrimeFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTies(s.toString());
-                updateCrime();
+                mTeam.setTies(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -410,7 +417,7 @@ public class CrimeFragment extends Fragment implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mTypeSpinner.setAdapter(adapter);
                 mTypeSpinner.setOnItemSelectedListener(this);
-                mTypeSpinner.setSelection(mCrime.getType());
+                mTypeSpinner.setSelection(mTeam.getType());
         Log.i(TAG, "spinner change:" + mTypeSpinner.getSelectedItem().toString());
 
         mHangButton = (Button) v.findViewById(R.id.hang_button);
@@ -420,8 +427,8 @@ public class CrimeFragment extends Fragment implements
             public void onClick(View v)
             {
                 FragmentManager manager = getFragmentManager();
-                HangFragment dialog = HangFragment.newInstance(mCrime.getHang());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_HANG);
+                HangFragment dialog = HangFragment.newInstance(mTeam.getHang());
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_HANG);
                 dialog.show(manager, DIALOG_HANG);
                 updateHanging();
             }
@@ -444,8 +451,8 @@ public class CrimeFragment extends Fragment implements
         if(requestCode == REQUEST_DATE)
         {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mCrime.setDate(date);
-            updateCrime();
+            mTeam.setDate(date);
+            updateTeam();
             updateDate();
         }
         else if(requestCode == REQUEST_CONTACT && data != null)
@@ -462,9 +469,9 @@ public class CrimeFragment extends Fragment implements
                 }
                 c.moveToFirst();
                 String suspect = c.getString(0);
-                mCrime.setSuspect(suspect);
-                updateCrime();
-                mSuspectButton.setText(suspect);
+                mTeam.setContact(suspect);
+                updateTeam();
+                mContactButton.setText(suspect);
                 mCallButton.setEnabled(true);
                 teamId = c.getInt(1);
             }
@@ -475,21 +482,20 @@ public class CrimeFragment extends Fragment implements
         }
         else if(requestCode == REQUEST_PHOTO)
         {
-            updateCrime();
+            updateTeam();
             updatePhotoView();
         }
 
         if(requestCode == REQUEST_DELETE)
         {
-            //should this be changed as well, seeing as we can no longer exit the activity?
-            CrimeLab.get(getActivity()).deleteCrime(mCrime);
+            TeamLab.get(getActivity()).deleteTeam(mTeam);
             getActivity().finish();
         }
 
         if(requestCode == REQUEST_HANG)
         {
-            mCrime.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
-            updateCrime();
+            mTeam.setHang(data.getIntExtra(HangFragment.EXTRA_POSITION, 0));
+            updateTeam();
             updateHanging();
         }
 
@@ -497,8 +503,8 @@ public class CrimeFragment extends Fragment implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        mCrime.setType(position);
-        updateCrime();
+        mTeam.setType(position);
+        updateTeam();
     }
 
     @Override
@@ -510,7 +516,7 @@ public class CrimeFragment extends Fragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime, menu);
+        inflater.inflate(R.menu.fragment_team, menu);
     }
 
     @Override
@@ -518,10 +524,10 @@ public class CrimeFragment extends Fragment implements
     {
         switch(item.getItemId())
         {
-            case(R.id.menu_item_delete_crime):
+            case(R.id.menu_item_delete_team):
                 FragmentManager manager = getFragmentManager();
                 DeleteConfirmationFragment dialog = DeleteConfirmationFragment.newInstance();
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DELETE);
+                dialog.setTargetFragment(TeamFragment.this, REQUEST_DELETE);
                 dialog.show(manager, DIALOG_DELETE);
                 return(true);
             default:
@@ -529,52 +535,52 @@ public class CrimeFragment extends Fragment implements
         }
     }
 
-    private void updateCrime()
+    private void updateTeam()
     {
-        CrimeLab.get(getActivity()).updateCrime(mCrime);
-        mCallbacks.onCrimeUpdated(mCrime);
+        TeamLab.get(getActivity()).updateTeam(mTeam);
+        mCallbacks.onTeamUpdated(mTeam);
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mCrime.getDate()));
+        mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mTeam.getDate()));
     }
 
     private void updateDisquals()
     {
-        mDisquals.setText(getString(R.string.disquals_text, "" + mCrime.getDisquals()));
+        mDisquals.setText(getString(R.string.disquals_text, "" + mTeam.getDisquals()));
     }
 
     private void updateHanging()
     {
-        mHangButton.setText(getString(R.string.hang_text, mCrime.getHangString()));
+        mHangButton.setText(getString(R.string.hang_text, mTeam.getHangString()));
     }
 
-    private String getCrimeReport()
+    private String getTeamSummary()
     {
         String solvedString = null;
-        if(mCrime.isSolved())
+        if(mTeam.isCubes())
         {
-            solvedString = getString(R.string.crime_report_solved);
+            solvedString = getString(R.string.team_report_cubes);
         }
         else
         {
-            solvedString = getString(R.string.crime_report_unsolved);
+            solvedString = getString(R.string.team_report_no_cubes);
         }
 
         String dateFormat = "EEE, MMM dd";
-        String dateString = DateFormat.format(dateFormat, mCrime.getDate()).toString();
+        String dateString = DateFormat.format(dateFormat, mTeam.getDate()).toString();
 
-        String suspect = mCrime.getSuspect();
+        String suspect = mTeam.getContact();
         if(suspect == null)
         {
-            suspect = getString(R.string.crime_report_no_suspect);
+            suspect = getString(R.string.team_report_no_contact);
         }
         else
         {
-            suspect = getString(R.string.crime_report_suspect, suspect);
+            suspect = getString(R.string.team_report_contact, suspect);
         }
 
-        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
+        String report = getString(R.string.team_report, mTeam.getName(), dateString, solvedString, suspect);
         return report;
     }
 
@@ -586,7 +592,16 @@ public class CrimeFragment extends Fragment implements
         }
         else
         {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x, mPhotoViewSize.y);
+            Bitmap bitmap;
+            try
+            {
+                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x, mPhotoViewSize.y);
+            }
+            catch(NullPointerException npe)
+            {
+                Log.e(TAG, "Hit NullPointerException");
+                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            }
             mPhotoView.setImageBitmap(bitmap);
         }
     }

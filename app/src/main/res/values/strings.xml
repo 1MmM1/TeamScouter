@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CriminalIntent</string>
+    <string name="app_name">TeamScouter</string>
     <string name="action_settings">Settings</string>
-    <string name="crime_title_hint">Enter team name.</string>
-    <string name="crime_number_hint">Enter team number</string>
-    <string name="crime_title_label">Team Number</string>
+    <string name="team_name_hint">Enter team name.</string>
+    <string name="team_number_hint">Enter team number</string>
+    <string name="team_number_label">Team Number</string>
     <string name="team_name_label">Team Name</string>
-    <string name="crime_details_label">Details</string>
+    <string name="team_details_label">Details</string>
     <string name="robot_type_label">Type of Robot</string>
     <string name="date_picker_title">Last Date Played:</string>
-    <string name="new_crime">New Team</string>
-    <string name="delete_crime">Delete Team</string>
+    <string name="new_team">New Team</string>
+    <string name="delete_team">Delete Team</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <plurals name="subtitle_plural">
         <item quantity="one">%1$s team</item>
         <item quantity="other">%1$s teams</item>
     </plurals>
-    <string name="no_crimes_hint">There are no teams</string>
+    <string name="criteria_list">List of Criteria</string>
+    <string name="no_teams_hint">There are no teams</string>
     <string name="delete_confirmation_title">Warning!</string>
     <string name="delete_confirmation">Do you really want to delete this team?</string>
-    <string name="crime_suspect_text">Choose Team Coach</string>
+    <string name="team_contact_text">Choose Team Coach</string>
     <string name="call_coach_text">Call Team Coach</string>
-    <string name="crime_report_text">Send Coach a Report</string>
+    <string name="send_report_text">Send Coach a Report</string>
+    <string name="incorrect_wins_toast">Wins must be a number.</string>
+    <string name="empty_wins_toast">Wins cannot be empty</string>
 
-
-    <string name="crime_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>
-    <string name="crime_report_solved">The team can throw cubes</string>
-    <string name="crime_report_unsolved">The team can not throw cubes</string>
-    <string name="crime_report_no_suspect">there is no specified coach.</string>
-    <string name="crime_report_suspect">the coach is %s.</string>
-    <string name="crime_report_subject">TeamScouter Team Report</string>
+    <string name="team_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>
+    <string name="team_report_cubes">The team can throw cubes</string>
+    <string name="team_report_no_cubes">The team can not throw cubes</string>
+    <string name="team_report_no_contact">there is no specified coach.</string>
+    <string name="team_report_contact">the coach is %s.</string>
+    <string name="team_report_subject">TeamScouter Team Report</string>
     <string name="send_report">Send team report via</string>
     <string name="photo_zoom_title">Close Up View</string>
     <string-array name="types_of_robot">
