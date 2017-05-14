@@ -95,7 +95,7 @@ public class CriteriaListFragment extends Fragment{
 
     private void updateSubtitle()
     {
-        String subtitle = getResources().getQuantityString(R.plurals.criteria_subtitle_plural, Team.criteriaList.size(), Team.criteriaList.size());
+        String subtitle = getResources().getQuantityString(R.plurals.criteria_subtitle_plural, TeamLab.criteriaList.size(), TeamLab.criteriaList.size());
 
         if(!mCriteriaSubtitleVisible)
         {
@@ -127,7 +127,7 @@ public class CriteriaListFragment extends Fragment{
         {
 //            mCriteria = criteria;
             mCriteriaName.setText(getString(R.string.criteria_name_text, criteria));
-            mCriteriaType.setText(getString(R.string.criteria_name_text, Team.criteriaList.get(criteria)));
+            mCriteriaType.setText(getString(R.string.criteria_name_text, TeamLab.criteriaList.get(criteria)));
             if (position % 2 == 1)
                 mCriteriaList.setBackgroundColor(Color.rgb(186, 236, 255));
             else
@@ -146,13 +146,13 @@ public class CriteriaListFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(CriteriaHolder holder, int position) {
-            String criteria = Team.getCriteriaAt(position);
+            String criteria = TeamLab.getCriteriaAt(position);
             holder.bindCriteria(criteria, position);
         }
 
         @Override
         public int getItemCount() {
-            return Team.criteriaList.size();
+            return TeamLab.criteriaList.size();
         }
     }
 }

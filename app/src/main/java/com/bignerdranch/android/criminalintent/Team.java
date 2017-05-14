@@ -23,9 +23,6 @@ public class Team implements Comparable <Team> {
     private int mDisquals;
     private int mHang;
 
-    public static final List<String> hangingTypes = Arrays.asList("None", "Low", "High");
-    public static final Map<String, String> criteriaList = createCriteriaMap();
-
     public Team() {
         this(UUID.randomUUID());
     }
@@ -132,7 +129,7 @@ public class Team implements Comparable <Team> {
 
     public String getHangString()
     {
-        return(hangingTypes.get(mHang));
+        return(TeamLab.hangingTypes.get(mHang));
     }
 
     public int compareTo(Team team) {
@@ -141,38 +138,5 @@ public class Team implements Comparable <Team> {
         if (wins == teamWins)
             return mName.compareTo(team.mName);
         return (teamWins - wins);
-    }
-
-    private static Map<String, String> createCriteriaMap()
-    {
-        Map<String, String> currentCriteria =  new TreeMap<String, String>();
-        currentCriteria.put("Team Name", "String");
-        currentCriteria.put("Team Number", "String");
-        currentCriteria.put("Wins", "Number");
-        currentCriteria.put("Ties", "Number");
-        currentCriteria.put("Losses", "Number");
-        currentCriteria.put("Robot Type", "String");
-        currentCriteria.put("Hanging", "String");
-        currentCriteria.put("Cubes", "True/False");
-        currentCriteria.put("Disqualifications", "Number");
-        currentCriteria.put("Last Date Played", "Date");
-        currentCriteria.put("Team Contact", "String");
-        return(Collections.unmodifiableMap(currentCriteria));
-    }
-
-    public static String getCriteriaAt(int position)
-    {
-        int curr = 0;
-
-        for(String criteria : criteriaList.keySet())
-        {
-            if(curr == position)
-            {
-                return (criteria);
-            }
-            curr++;
-        }
-
-        return null;
     }
 }
