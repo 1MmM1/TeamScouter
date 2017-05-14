@@ -549,7 +549,7 @@ public class TeamFragment extends Fragment implements
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("MMMM d, yyyy", mTeam.getDate()));
+        mDateButton.setText(DateFormat.format("MMM d, yyyy", mTeam.getDate()));
     }
 
     private void updateDisquals()
