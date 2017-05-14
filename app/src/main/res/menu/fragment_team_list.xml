@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_item_new_team"
-        android:icon="@drawable/ic_menu_add"
+        android:icon="@drawable/ic_add_list_button"
         android:name="@string/new_team"
         app:showAsAction="ifRoom|withText" />
     <item
