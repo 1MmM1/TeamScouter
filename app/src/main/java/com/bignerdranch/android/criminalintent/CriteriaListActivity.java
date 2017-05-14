@@ -12,7 +12,13 @@ import java.util.Map;
 
 public class CriteriaListActivity extends SingleFragmentActivity {
 
-//    public static Intent newInstance(Context packageContext, Map<String, String>)
+//    private static final String EXTRA_CRITERIA_MAP = "com.bignerdranch.android.criminalintent.criteria_map";
+
+//    public static Intent newInstance(Context packageContext, Map<String, String> criteriaList)
+//    {
+//        Intent i = new Intent(packageContext, CriteriaListActivity.class);
+//        i.putExtra(EXTRA_CRITERIA_MAP, criteriaList);
+//    }
 
     @Override
     protected Fragment createFragment() {

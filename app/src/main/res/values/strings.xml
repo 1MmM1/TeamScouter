@@ -56,4 +56,7 @@
     <string name="ties_title">Ties:</string>
     <string name="losses_title">Losses:</string>
     <string name="win_tie_loss_edit_text_spacing">       </string>
+
+    <string name="criteria_name_text">%1$s</string>
+    <string name="criteria_type_text">%1$s</string>
 </resources>

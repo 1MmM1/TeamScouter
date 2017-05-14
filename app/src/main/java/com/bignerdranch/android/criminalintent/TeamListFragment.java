@@ -211,6 +211,7 @@ public class TeamListFragment extends Fragment {
             mTitleTextView.setText(mTeam.getName());
             mDateTextView.setText(mTeam.getNumber());
             mWinLossTie.setText(getString(R.string.win_loss_ties, mTeam.getWins(), mTeam.getTies(), mTeam.getLosses()));
+            //we might want to use getAdapterPosition instead of position (it was suggested in the documentation)
             mRanking.setText(getString(R.string.rank, position + ""));
             if (position % 2 != 1)
                 mTeamList.setBackgroundColor(Color.GRAY);

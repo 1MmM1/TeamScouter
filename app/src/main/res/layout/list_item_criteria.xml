@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/criteria_list_layout">
+
+    <TextView
+        android:id="@+id/list_item_criteria_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:padding="10dp"
+        android:textSize="17dp"
+        android:text="@string/criteria_name_text"/>
+
+    <TextView
+        android:id="@+id/list_item_criteria_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/criteria_type_text"
+        android:textSize="17dp"
+        android:padding="10dp"
+        />
+
+</RelativeLayout>
