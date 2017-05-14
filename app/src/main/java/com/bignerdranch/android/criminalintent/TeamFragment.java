@@ -321,7 +321,7 @@ public class TeamFragment extends Fragment implements
         });
 
         mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
-        Log.i(TAG, "Firt Pass: " + mTeam.getDisquals());
+        Log.i(TAG, "First Pass: " + mTeam.getDisquals());
         updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
@@ -356,7 +356,7 @@ public class TeamFragment extends Fragment implements
                 if(s == null || s.toString().equals(""))
                 {
                     mWins.setText(mTeam.getWins());
-                    Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Wins"), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -381,8 +381,16 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTeam.setLosses(s.toString());
-                updateTeam();
+                if(s == null || s.toString().equals(""))
+                {
+                    mLosses.setText(mTeam.getLosses());
+                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Losses"), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    mTeam.setLosses(s.toString());
+                    updateTeam();
+                }
             }
 
             @Override
@@ -401,8 +409,15 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTeam.setTies(s.toString());
-                updateTeam();
+                if(s == null || s.toString().equals(""))
+                {
+                    mTies.setText(mTeam.getTies());
+                    Toast.makeText(getActivity(), getString(R.string.empty_wlt_toast, "Ties"), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mTeam.setTies(s.toString());
+                    updateTeam();
+                }
             }
 
             @Override
