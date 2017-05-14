@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -136,6 +137,8 @@ public class TeamListFragment extends Fragment {
                 updateSubtitle();
                 return(true);
             case(R.id.menu_item_criteria_list):
+                Intent i = new Intent(getActivity(), CriteriaListActivity.class);
+                startActivity(i);
                 return(true);
             default:
                 return(super.onOptionsItemSelected(item));
