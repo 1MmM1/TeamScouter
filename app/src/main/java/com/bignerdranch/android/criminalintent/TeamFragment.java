@@ -117,6 +117,10 @@ public class TeamFragment extends Fragment implements
     {
         super.onPause();
 
+        mTeam.setWins(checkForLeadingZeroes(mTeam.getWins()));
+        mTeam.setTies(checkForLeadingZeroes(mTeam.getTies()));
+        mTeam.setLosses(checkForLeadingZeroes(mTeam.getLosses()));
+
         TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
@@ -619,5 +623,20 @@ public class TeamFragment extends Fragment implements
             }
             mPhotoView.setImageBitmap(bitmap);
         }
+    }
+
+    private String checkForLeadingZeroes(String num)
+    {
+        if(num.length() > 0) {
+            for (int i = 0; i < num.length(); i++) {
+                Log.i(TAG, "Leading zeroes? " + num.charAt(i));
+                if (num.charAt(i) == '0') {
+                    return checkForLeadingZeroes(num.substring(i + 1));
+                } else {
+                    return num;
+                }
+            }
+        }
+        return("0");
     }
 }
