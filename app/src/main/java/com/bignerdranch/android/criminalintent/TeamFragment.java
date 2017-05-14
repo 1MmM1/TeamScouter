@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -34,7 +35,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Date;
 
@@ -607,7 +607,7 @@ public class TeamFragment extends Fragment implements
     {
         if(mPhotoFile == null || !mPhotoFile.exists())
         {
-            mPhotoView.setImageDrawable(null);
+            mPhotoView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.gear_placeholder));
         }
         else
         {
