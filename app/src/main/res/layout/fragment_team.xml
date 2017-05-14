@@ -141,7 +141,7 @@
             android:textSize="17dp"
             android:paddingLeft="20dp"
             android:layout_gravity="center_vertical"
-            android:paddingRight="10dp"/>
+            android:paddingRight="22dp"/>
 
         <ImageButton
             android:id="@+id/add_disquals_button"
