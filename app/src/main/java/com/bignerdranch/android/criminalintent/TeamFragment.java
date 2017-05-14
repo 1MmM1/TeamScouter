@@ -576,30 +576,40 @@ public class TeamFragment extends Fragment implements
 
     private String getTeamSummary()
     {
-        String solvedString = null;
+        String cubesString = null;
         if(mTeam.isCubes())
         {
-            solvedString = getString(R.string.team_report_cubes);
+            cubesString = getString(R.string.team_report_cubes);
         }
         else
         {
-            solvedString = getString(R.string.team_report_no_cubes);
+            cubesString = getString(R.string.team_report_no_cubes);
         }
 
-        String dateFormat = "EEE, MMM dd";
+        String hangString = null;
+        if(mTeam.getHang() == 0)
+        {
+            hangString = getString(R.string.team_summary_no_hang);
+        }
+        else
+        {
+            hangString = getString(R.string.team_summary_hang_level, mTeam.getHangString());
+        }
+
+        String dateFormat = "EEEE, MMMM dd";
         String dateString = DateFormat.format(dateFormat, mTeam.getDate()).toString();
 
-        String suspect = mTeam.getContact();
-        if(suspect == null)
+        String contact = mTeam.getContact();
+        if(contact == null)
         {
-            suspect = getString(R.string.team_report_no_contact);
+            contact = getString(R.string.team_report_no_contact);
         }
         else
         {
-            suspect = getString(R.string.team_report_contact, suspect);
+            contact = getString(R.string.team_report_contact, contact);
         }
 
-        String report = getString(R.string.team_report, mTeam.getName(), dateString, solvedString, suspect);
+        String report = getString(R.string.team_report, mTeam.getName(), mTeam.getNumber(), dateString, cubesString, hangString, contact);
         return report;
     }
 

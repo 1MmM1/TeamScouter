@@ -28,16 +28,18 @@
     <string name="delete_confirmation">Do you really want to delete this team?</string>
     <string name="team_contact_text">Choose Team Coach</string>
     <string name="call_coach_text">Call Team Coach</string>
-    <string name="send_report_text">Send Coach a Report</string>
+    <string name="send_report_text">Get Team Summary</string>
     <string name="empty_wlt_toast">%s cannot be empty</string>
 
-    <string name="team_report">%1$s! The team played last on %2$s. %3$s, and %4$s</string>
+    <string name="team_report">%1$s(%2$s) played last on %3$s! %4$s, and %5$s. %6$s.</string>
     <string name="team_report_cubes">The team can throw cubes</string>
     <string name="team_report_no_cubes">The team can not throw cubes</string>
-    <string name="team_report_no_contact">there is no specified coach.</string>
-    <string name="team_report_contact">the coach is %s.</string>
-    <string name="team_report_subject">TeamScouter Team Report</string>
-    <string name="send_report">Send team report via</string>
+    <string name="team_summary_no_hang">cannot hang</string>
+    <string name="team_summary_hang_level">can %1$s hang</string>
+    <string name="team_report_no_contact">There is no specified coach</string>
+    <string name="team_report_contact">The coach is %s</string>
+    <string name="team_report_subject">TeamScouter Team Summary</string>
+    <string name="send_report">Send team summary via</string>
     <string name="photo_zoom_title">Close Up View</string>
     <string-array name="types_of_robot">
         <item>Fire</item>
