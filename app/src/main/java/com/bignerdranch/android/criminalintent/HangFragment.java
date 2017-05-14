@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -42,7 +43,10 @@ public class HangFragment extends DialogFragment {
         mHangBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                Toast.makeText(getActivity(), TeamLab.hangingTypes.get(progress), Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(getActivity(), TeamLab.hangingTypes.get(progress), Toast.LENGTH_SHORT);
+                View view = toast.getView();
+                view.setBackgroundResource(R.color.bright_blue);
+                toast.show();
             }
 
             @Override
