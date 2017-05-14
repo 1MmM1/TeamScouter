@@ -17,6 +17,10 @@
         <item quantity="one">%1$s team</item>
         <item quantity="other">%1$s teams</item>
     </plurals>
+    <plurals name="criteria_subtitle_plural">
+        <item quantity="one">%1$s criterion</item>
+        <item quantity="other">%1$s criteria</item>
+    </plurals>
     <string name="criteria_list">List of Criteria</string>
     <string name="no_teams_hint">There are no teams</string>
     <string name="delete_confirmation_title">Warning!</string>

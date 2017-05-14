@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +25,10 @@ import java.util.List;
 
 public class CriteriaListFragment extends Fragment{
 
+    private static final String SAVED_CRITERIA_SUBTITLE_VISIBLE = "criteriaSubtitle";
+
     private RecyclerView mCriteriaRecyclerView;
+    private boolean mCriteriaSubtitleVisible;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,6 +40,11 @@ public class CriteriaListFragment extends Fragment{
 
         mCriteriaRecyclerView.setAdapter(new CriteriaAdapter());
 
+        if(savedInstanceState != null)
+        {
+            mCriteriaSubtitleVisible = savedInstanceState.getBoolean(SAVED_CRITERIA_SUBTITLE_VISIBLE);
+        }
+
         return view;
     }
 
@@ -46,10 +55,27 @@ public class CriteriaListFragment extends Fragment{
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_CRITERIA_SUBTITLE_VISIBLE, mCriteriaSubtitleVisible);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_criteria_list, menu);
+
+        MenuItem subtitleItem = menu.findItem(R.id.criteria_menu_item_show_subtitle);
+        if(mCriteriaSubtitleVisible)
+        {
+            subtitleItem.setTitle(R.string.hide_subtitle);
+        }
+        else
+        {
+            subtitleItem.setTitle(R.string.show_subtitle);
+        }
     }
 
     @Override
@@ -58,10 +84,26 @@ public class CriteriaListFragment extends Fragment{
         switch(item.getItemId())
         {
             case(R.id.criteria_menu_item_show_subtitle):
+                mCriteriaSubtitleVisible = !mCriteriaSubtitleVisible;
+                getActivity().invalidateOptionsMenu();
+                updateSubtitle();
                 return(true);
             default:
                 return(super.onOptionsItemSelected(item));
         }
+    }
+
+    private void updateSubtitle()
+    {
+        String subtitle = getResources().getQuantityString(R.plurals.criteria_subtitle_plural, Team.criteriaList.size(), Team.criteriaList.size());
+
+        if(!mCriteriaSubtitleVisible)
+        {
+            subtitle = null;
+        }
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     private class CriteriaHolder extends RecyclerView.ViewHolder
