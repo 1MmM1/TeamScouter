@@ -92,7 +92,8 @@
             android:id="@+id/type_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp">
+            android:paddingLeft="20dp"
+            android:backgroundTint="@color/bright_blue">
         </Spinner>
     </LinearLayout>
 
@@ -141,12 +142,13 @@
             android:textSize="17dp"
             android:paddingLeft="20dp"
             android:layout_gravity="center_vertical"
-            android:paddingRight="10dp"/>
+            android:paddingRight="22dp"/>
 
         <ImageButton
             android:id="@+id/add_disquals_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:backgroundTint="@color/bright_blue"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_action_add_blue"/>
 
@@ -162,6 +164,7 @@
             android:id="@+id/subtract_disquals_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:backgroundTint="@color/bright_blue"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_action_remove"/>
 

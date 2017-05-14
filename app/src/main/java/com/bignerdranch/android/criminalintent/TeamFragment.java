@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -34,7 +35,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Date;
 
@@ -116,7 +116,6 @@ public class TeamFragment extends Fragment implements
     public void onPause()
     {
         super.onPause();
-
         TeamLab.get(getActivity()).updateTeam(mTeam);
     }
 
@@ -321,7 +320,7 @@ public class TeamFragment extends Fragment implements
         });
 
         mDisquals = (TextView) v.findViewById(R.id.total_disquals_text_view);
-        Log.i(TAG, "Firt Pass: " + mTeam.getDisquals());
+        Log.i(TAG, "First Pass: " + mTeam.getDisquals());
         updateDisquals();
 
         mSubtractButton = (ImageButton) v.findViewById(R.id.subtract_disquals_button);
@@ -353,16 +352,8 @@ public class TeamFragment extends Fragment implements
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s == null || s.toString().equals(""))
-                {
-                    mWins.setText(mTeam.getWins());
-                    Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    mTeam.setWins(s.toString());
-                    updateTeam();
-                }
+                mTeam.setWins(s.toString());
+                updateTeam();
             }
 
             @Override
@@ -537,12 +528,28 @@ public class TeamFragment extends Fragment implements
 
     private void updateTeam()
     {
+        mTeam.setWins(checkForLeadingZeroes(mTeam.getWins()));
+        mTeam.setTies(checkForLeadingZeroes(mTeam.getTies()));
+        mTeam.setLosses(checkForLeadingZeroes(mTeam.getLosses()));
+
+        if(mTeam.getWins() == null || mTeam.getWins().equals(""))
+        {
+            mTeam.setWins("0");
+        }
+        if(mTeam.getTies() == null || mTeam.getTies().equals(""))
+        {
+            mTeam.setTies("0");
+        }
+        if(mTeam.getLosses() == null || mTeam.getLosses().equals(""))
+        {
+            mTeam.setLosses("0");
+        }
         TeamLab.get(getActivity()).updateTeam(mTeam);
         mCallbacks.onTeamUpdated(mTeam);
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("EEEE, MMMM d, yyyy", mTeam.getDate()));
+        mDateButton.setText(DateFormat.format("MMM d, yyyy", mTeam.getDate()));
     }
 
     private void updateDisquals()
@@ -557,30 +564,40 @@ public class TeamFragment extends Fragment implements
 
     private String getTeamSummary()
     {
-        String solvedString = null;
+        String cubesString = null;
         if(mTeam.isCubes())
         {
-            solvedString = getString(R.string.team_report_cubes);
+            cubesString = getString(R.string.team_report_cubes);
         }
         else
         {
-            solvedString = getString(R.string.team_report_no_cubes);
+            cubesString = getString(R.string.team_report_no_cubes);
         }
 
-        String dateFormat = "EEE, MMM dd";
+        String hangString = null;
+        if(mTeam.getHang() == 0)
+        {
+            hangString = getString(R.string.team_summary_no_hang);
+        }
+        else
+        {
+            hangString = getString(R.string.team_summary_hang_level, mTeam.getHangString());
+        }
+
+        String dateFormat = "EEEE, MMMM dd";
         String dateString = DateFormat.format(dateFormat, mTeam.getDate()).toString();
 
-        String suspect = mTeam.getContact();
-        if(suspect == null)
+        String contact = mTeam.getContact();
+        if(contact == null)
         {
-            suspect = getString(R.string.team_report_no_contact);
+            contact = getString(R.string.team_report_no_contact);
         }
         else
         {
-            suspect = getString(R.string.team_report_contact, suspect);
+            contact = getString(R.string.team_report_contact, contact);
         }
 
-        String report = getString(R.string.team_report, mTeam.getName(), dateString, solvedString, suspect);
+        String report = getString(R.string.team_report, mTeam.getName(), mTeam.getNumber(), dateString, cubesString, hangString, contact);
         return report;
     }
 
@@ -588,7 +605,7 @@ public class TeamFragment extends Fragment implements
     {
         if(mPhotoFile == null || !mPhotoFile.exists())
         {
-            mPhotoView.setImageDrawable(null);
+            mPhotoView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.gear_placeholder));
         }
         else
         {
@@ -604,5 +621,20 @@ public class TeamFragment extends Fragment implements
             }
             mPhotoView.setImageBitmap(bitmap);
         }
+    }
+
+    private String checkForLeadingZeroes(String num)
+    {
+        if(num.length() > 0) {
+            for (int i = 0; i < num.length(); i++) {
+                Log.i(TAG, "Leading zeroes? " + num.charAt(i));
+                if (num.charAt(i) == '0') {
+                    return checkForLeadingZeroes(num.substring(i + 1));
+                } else {
+                    return num;
+                }
+            }
+        }
+        return("0");
     }
 }

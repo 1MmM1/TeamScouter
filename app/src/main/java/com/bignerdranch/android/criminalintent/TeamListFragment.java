@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -136,6 +137,8 @@ public class TeamListFragment extends Fragment {
                 updateSubtitle();
                 return(true);
             case(R.id.menu_item_criteria_list):
+                Intent i = new Intent(getActivity(), CriteriaListActivity.class);
+                startActivity(i);
                 return(true);
             default:
                 return(super.onOptionsItemSelected(item));
@@ -208,9 +211,10 @@ public class TeamListFragment extends Fragment {
             mTitleTextView.setText(mTeam.getName());
             mDateTextView.setText(mTeam.getNumber());
             mWinLossTie.setText(getString(R.string.win_loss_ties, mTeam.getWins(), mTeam.getTies(), mTeam.getLosses()));
+            //we might want to use getAdapterPosition instead of position (it was suggested in the documentation)
             mRanking.setText(getString(R.string.rank, position + ""));
             if (position % 2 != 1)
-                mTeamList.setBackgroundColor(Color.GRAY);
+                mTeamList.setBackgroundColor(Color.rgb(186, 236, 255));
             else
                 mTeamList.setBackgroundColor(Color.WHITE);
         }

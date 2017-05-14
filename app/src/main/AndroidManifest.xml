@@ -25,6 +25,10 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".CriteriaListActivity"
+                  android:label="@string/criteria_list_name"
+                  android:parentActivityName=".TeamListActivity">
+        </activity>
     </application>
 
 </manifest>

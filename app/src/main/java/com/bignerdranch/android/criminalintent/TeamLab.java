@@ -12,7 +12,11 @@ import com.bignerdranch.android.criminalintent.database.TeamDbSchema.TeamTable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 public class TeamLab {
@@ -20,6 +24,9 @@ public class TeamLab {
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
+
+    public static final List<String> hangingTypes = Arrays.asList("None", "Low", "High");
+    public static final Map<String, String> criteriaList = createCriteriaMap();
 
     public static TeamLab get(Context context) {
         if (sTeamLab == null) {
@@ -131,5 +138,38 @@ public class TeamLab {
     {
         Cursor cursor = mDatabase.query(TeamTable.NAME, null, whereClause, whereArgs, null, null, null);
         return(new TeamCursorWrapper(cursor));
+    }
+
+    private static Map<String, String> createCriteriaMap()
+    {
+        Map<String, String> currentCriteria =  new TreeMap<String, String>();
+        currentCriteria.put("Team Name", "String");
+        currentCriteria.put("Team Number", "String");
+        currentCriteria.put("Wins", "Number");
+        currentCriteria.put("Ties", "Number");
+        currentCriteria.put("Losses", "Number");
+        currentCriteria.put("Robot Type", "String");
+        currentCriteria.put("Hanging", "String");
+        currentCriteria.put("Cubes", "True/False");
+        currentCriteria.put("Disqualifications", "Number");
+        currentCriteria.put("Last Date Played", "Date");
+        currentCriteria.put("Team Contact", "String");
+        return(Collections.unmodifiableMap(currentCriteria));
+    }
+
+    public static String getCriteriaAt(int position)
+    {
+        int curr = 0;
+
+        for(String criteria : criteriaList.keySet())
+        {
+            if(curr == position)
+            {
+                return (criteria);
+            }
+            curr++;
+        }
+
+        return null;
     }
 }

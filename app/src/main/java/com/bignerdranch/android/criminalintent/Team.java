@@ -1,8 +1,11 @@
 package com.bignerdranch.android.criminalintent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 public class Team implements Comparable <Team> {
@@ -19,8 +22,6 @@ public class Team implements Comparable <Team> {
     private String mTies;
     private int mDisquals;
     private int mHang;
-
-    public static final List<String> hangingTypes = Arrays.asList("None", "Low", "High");
 
     public Team() {
         this(UUID.randomUUID());
@@ -128,14 +129,29 @@ public class Team implements Comparable <Team> {
 
     public String getHangString()
     {
-        return(hangingTypes.get(mHang));
+        return(TeamLab.hangingTypes.get(mHang));
     }
 
     public int compareTo(Team team) {
         int wins = Integer.parseInt(mWins);
         int teamWins = Integer.parseInt(team.mWins);
-        if (wins == teamWins)
-            return mName.compareTo(team.mName);
+        if (wins == teamWins) {
+            int ties = Integer.parseInt(mTies);
+            int teamTies = Integer.parseInt(team.mTies);
+            if(ties == teamTies)
+            {
+                int losses = Integer.parseInt(mLosses);
+                int teamLosses = Integer.parseInt(team.mLosses);
+                if(losses == teamLosses) {
+                    if (mName.equals("")) {
+                        return (1);
+                    }
+                    return mName.compareTo(team.mName);
+                }
+                return (losses - teamLosses);
+            }
+            return (teamTies - ties);
+        }
         return (teamWins - wins);
     }
 }
