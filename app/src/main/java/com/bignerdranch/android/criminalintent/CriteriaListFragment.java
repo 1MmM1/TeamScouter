@@ -45,6 +45,8 @@ public class CriteriaListFragment extends Fragment{
             mCriteriaSubtitleVisible = savedInstanceState.getBoolean(SAVED_CRITERIA_SUBTITLE_VISIBLE);
         }
 
+        updateSubtitle();
+
         return view;
     }
 
