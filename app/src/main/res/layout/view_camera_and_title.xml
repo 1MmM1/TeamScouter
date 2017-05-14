@@ -45,7 +45,7 @@
             android:hint="@string/team_name_hint"
             android:textColor="@color/black"
             android:textCursorDrawable="@drawable/cursor_color"
-            />
+            android:theme="@style/editTextStyle"/>
 
         <EditText
             android:id="@+id/team_number"
@@ -54,9 +54,8 @@
             android:layout_marginRight="16dp"
             android:hint="@string/team_number_hint"
             android:textColor="@color/black"
+            android:theme="@style/editTextStyle"
             android:textCursorDrawable="@drawable/cursor_color"/>
-
-
 
     </LinearLayout>
 </LinearLayout>
