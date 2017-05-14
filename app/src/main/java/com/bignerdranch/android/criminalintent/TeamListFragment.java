@@ -135,6 +135,8 @@ public class TeamListFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
                 return(true);
+            case(R.id.menu_item_criteria_list):
+                return(true);
             default:
                 return(super.onOptionsItemSelected(item));
         }

@@ -72,7 +72,6 @@ public class TeamFragment extends Fragment implements
     private ImageView mPhotoView;
     private Point mPhotoViewSize;
     private Callbacks mCallbacks;
-    private Date mDate;
     private EditText mWins;
     private EditText mLosses;
     private EditText mTies;
@@ -80,7 +79,6 @@ public class TeamFragment extends Fragment implements
     private Button mHangButton;
     private ImageButton mPlusButton;
     private ImageButton mSubtractButton;
-//    private SeekBar mHanging;
 
     private int teamId;
 
@@ -365,24 +363,6 @@ public class TeamFragment extends Fragment implements
                     mTeam.setWins(s.toString());
                     updateTeam();
                 }
-//                try {
-//                    int i = Integer.parseInt(s.toString());
-//                    Log.i(TAG, "string added:" + i);
-//                    mTeam.setWins(s.toString());
-//                } catch (NumberFormatException nfe) {
-//                    Log.i(TAG, "Hit error, wins = " + mTeam.getWins());
-//                    mWins.setText(mTeam.getWins());
-//                    if (s != null) {
-//                        if(s == "")
-//                        {
-//                            Toast.makeText(getActivity(), R.string.empty_wins_toast, Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(getActivity(), R.string.incorrect_wins_toast, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }
-//                updateTeam();
             }
 
             @Override
@@ -508,7 +488,6 @@ public class TeamFragment extends Fragment implements
 
         if(requestCode == REQUEST_DELETE)
         {
-            //should this be changed as well, seeing as we can no longer exit the activity?
             TeamLab.get(getActivity()).deleteTeam(mTeam);
             getActivity().finish();
         }
