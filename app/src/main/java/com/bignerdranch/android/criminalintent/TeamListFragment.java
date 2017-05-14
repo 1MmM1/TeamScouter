@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -184,6 +186,7 @@ public class TeamListFragment extends Fragment {
         private TextView mDateTextView;
         private TextView mWinLossTie;
         private TextView mRanking;
+        private RelativeLayout mTeamList;
 
         private Team mTeam;
 
@@ -195,6 +198,7 @@ public class TeamListFragment extends Fragment {
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_team_number_text_view);
             mWinLossTie = (TextView) itemView.findViewById(R.id.list_item_win_loss_tie_text_view);
             mRanking = (TextView) itemView.findViewById(R.id.team_rank_text_view);
+            mTeamList = (RelativeLayout) itemView.findViewById(R.id.team_list_layout);
         }
 
         public void bindTeam(Team team, int position) {
@@ -203,6 +207,10 @@ public class TeamListFragment extends Fragment {
             mDateTextView.setText(mTeam.getNumber());
             mWinLossTie.setText(getString(R.string.win_loss_ties, mTeam.getWins(), mTeam.getTies(), mTeam.getLosses()));
             mRanking.setText(getString(R.string.rank, position + ""));
+            if (position % 2 != 1)
+                mTeamList.setBackgroundColor(Color.GRAY);
+            else
+                mTeamList.setBackgroundColor(Color.WHITE);
         }
 
         @Override
