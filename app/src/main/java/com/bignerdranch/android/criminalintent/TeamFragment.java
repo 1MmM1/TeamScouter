@@ -449,8 +449,10 @@ public class TeamFragment extends Fragment implements
         else if(requestCode == REQUEST_CONTACT && data != null)
         {
             Uri contactUri = data.getData();
-            String[] queryFields = new String[] {ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts._ID};
-            Cursor c = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
+            String[] queryFields = new String[] {ContactsContract.Contacts.DISPLAY_NAME,
+                    ContactsContract.Contacts._ID};
+            Cursor c = getActivity().getContentResolver().query(contactUri,
+                    queryFields, null, null, null);
 
             try
             {
@@ -605,14 +607,16 @@ public class TeamFragment extends Fragment implements
     {
         if(mPhotoFile == null || !mPhotoFile.exists())
         {
-            mPhotoView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.gear_placeholder));
+            mPhotoView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                    R.drawable.gear_placeholder));
         }
         else
         {
             Bitmap bitmap;
             try
             {
-                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x, mPhotoViewSize.y);
+                bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoViewSize.x,
+                        mPhotoViewSize.y);
             }
             catch(NullPointerException npe)
             {

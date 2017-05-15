@@ -14,7 +14,8 @@ public class TeamListActivity extends SingleFragmentActivity
     @Override
     public void onTeamUpdated(Team team)
     {
-        TeamListFragment listFragment = (TeamListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        TeamListFragment listFragment = (TeamListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container);
         listFragment.updateUI();
     }
 
@@ -35,7 +36,8 @@ public class TeamListActivity extends SingleFragmentActivity
         else
         {
             Fragment newDetail = TeamFragment.newInstance(team.getId());
-            getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, newDetail).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail_fragment_container, newDetail).commit();
         }
     }
 }

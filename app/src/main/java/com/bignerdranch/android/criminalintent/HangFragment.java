@@ -43,7 +43,8 @@ public class HangFragment extends DialogFragment {
         mHangBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                Toast toast = Toast.makeText(getActivity(), TeamLab.hangingTypes.get(progress), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getActivity(),
+                        TeamLab.hangingTypes.get(progress), Toast.LENGTH_SHORT);
                 View view = toast.getView();
                 view.setBackgroundResource(R.color.bright_blue);
                 toast.show();

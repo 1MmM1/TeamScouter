@@ -12,7 +12,8 @@ import java.util.Map;
 
 public class CriteriaListActivity extends SingleFragmentActivity {
 
-//    private static final String EXTRA_CRITERIA_MAP = "com.bignerdranch.android.criminalintent.criteria_map";
+//    private static final String EXTRA_CRITERIA_MAP = "com.bignerdranch.android.criminalintent
+//          .criteria_map";
 
 //    public static Intent newInstance(Context packageContext, Map<String, String> criteriaList)
 //    {

@@ -50,12 +50,14 @@ public class PictureFragment extends DialogFragment
             mPhotoView.setImageBitmap(bitmap);
         }
 
-        return (new AlertDialog.Builder(getActivity()).setView(v).setTitle(R.string.photo_zoom_title)
+        return (new AlertDialog.Builder(getActivity()).setView(v)
+                .setTitle(R.string.photo_zoom_title)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
+                        getTargetFragment().onActivityResult(getTargetRequestCode(),
+                                Activity.RESULT_OK, null);
                     }
                 }).create());
     }

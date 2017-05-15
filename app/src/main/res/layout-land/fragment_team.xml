@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include layout="@layout/view_camera_and_title"></include>
 
@@ -21,8 +22,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
             <!--We should consider adding hints to the EditText instead of space-->
 
@@ -37,8 +38,9 @@
                 android:id="@+id/wins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:text="@string/win_tie_loss_edit_text_spacing" />
+                android:maxLength="10"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,8 +53,9 @@
                 android:id="@+id/ties"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:text="@string/win_tie_loss_edit_text_spacing"/>
+                android:maxLength="10"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -65,40 +68,41 @@
                 android:id="@+id/losses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:text="@string/win_tie_loss_edit_text_spacing"/>
+                android:maxLength="10"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:orientation="horizontal"
             android:paddingBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="20dp"
                 android:text="@string/robot_type_label"
-                android:textSize="17dp"
-                android:paddingRight="20dp"/>
+                android:textSize="17dp"/>
 
             <Spinner
                 android:id="@+id/type_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:paddingLeft="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cube_checkbox_text"
-                android:textSize="17dp"
+                android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:layout_weight="1"/>
+                android:text="@string/cube_checkbox_text"
+                android:textSize="17dp"/>
 
             <CheckBox
                 android:id="@+id/cubes"
@@ -119,7 +123,7 @@
                 android:id="@+id/hang_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                android:layout_weight="1"
                 android:text="@string/hang_text"/>
 
             <!--Disqualifications-->
@@ -127,17 +131,18 @@
                 android:id="@+id/disqualification_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/disquals_title"
-                android:textSize="17dp"
-                android:paddingLeft="5dp"
                 android:layout_gravity="center_vertical"
-                android:paddingRight="10dp"/>
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/disquals_title"
+                android:textSize="17dp"/>
 
             <ImageButton
                 android:id="@+id/add_disquals_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/bright_blue"
                 android:src="@drawable/ic_action_add_blue"/>
 
             <TextView
@@ -145,15 +150,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@string/disquals_text"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:text="@string/disquals_text"/>
 
             <ImageButton
                 android:id="@+id/subtract_disquals_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_remove"/>
+                android:src="@drawable/ic_action_remove"
+                android:backgroundTint="@color/bright_blue"/>
 
         </LinearLayout>
 
