@@ -24,45 +24,57 @@ public class PictureUtils
 
         return(getScaledBitmap(path, size.x, size.y));
     }
-    public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight)
-    {
+
+    public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
+        // Read in the dimensions of the image on disk
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        //Bitmap bitmapOrg = BitmapFactory.decodeFile(path, options);
-/*        boolean portriat = false;
+        BitmapFactory.decodeFile(path, options);
 
-        try {
-            ExifInterface exif = new ExifInterface(path);
-            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            Log.i("PictureUtil", "rotation: " + rotation);
-            if (rotation == ExifInterface.ORIENTATION_ROTATE_90) {
-                portriat = true;
-            }
-        } catch (IOException io) {
-        }*/
+        float srcWidth = options.outWidth;
+        float srcHeight = options.outHeight;
 
-
-
-        int srcWidth = options.outWidth;
-        Log.i("PictureUtils", "SRCwidth:" + srcWidth);
-        int srcHeight = options.outHeight;
-        Log.i("PictureUtils", "SRCheight:" + srcHeight);
-
+        // Figure out how much to scale down by
         int inSampleSize = 1;
-        if(srcHeight > destHeight || srcWidth > destWidth)
-        {
-            if(srcWidth > srcHeight)
-            {
+        if (srcHeight > destHeight || srcWidth > destWidth) {
+            if (srcWidth > srcHeight) {
                 inSampleSize = Math.round(srcHeight / destHeight);
-            }
-            else
-            {
+            } else {
                 inSampleSize = Math.round(srcWidth / destWidth);
             }
         }
-
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
-        return BitmapFactory.decodeFile(path, options);
+
+// Read in and create final bitmap
+        Bitmap scaledBitmap = BitmapFactory.decodeFile(path, options);
+        ExifInterface exifInterface;
+        try {
+            exifInterface = new ExifInterface(path);
+            String orientationString = exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION);
+            int orientationTag = orientationString != null ? Integer.parseInt(orientationString) :
+                    ExifInterface.ORIENTATION_NORMAL;
+            Matrix matrix = new Matrix();
+
+            switch (orientationTag) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    matrix.postRotate(90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    matrix.postRotate(180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    matrix.postRotate(270);
+                    break;
+                default:
+                    matrix.postRotate(0);
+
+            }
+            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(),
+                    scaledBitmap.getHeight(), matrix, true);
+            return rotatedBitmap;
+        } catch (IOException e) {
+            return null;
+        }
     }
 }
