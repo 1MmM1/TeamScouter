@@ -63,14 +63,6 @@ public class PictureUtils
 
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
-
-/*       if (portriat) {
-           Matrix matrix = new Matrix();
-           matrix.postRotate(90);
-           Bitmap resizedBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile(path, options), 0, 0, destWidth, destHeight, matrix, true);
-           return resizedBitmap;
-       }*/
-
         return BitmapFactory.decodeFile(path, options);
     }
 }
