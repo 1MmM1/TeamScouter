@@ -1,221 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <include layout="@layout/view_camera_and_title"></include>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/criteria_title"
-        style="?android:listSeparatorTextViewStyle"/>
-
-    <!--Wins - Ties - Losses-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
-        <!--We should consider adding hints to the EditText instead of space-->
+        <include layout="@layout/view_camera_and_title"></include>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:text="@string/wins_title"
-            android:textSize="17dp"/>
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/criteria_title"/>
 
-        <EditText
-            android:id="@+id/wins"
+        <!--Wins - Ties - Losses-->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:digits="1234567890"
-            android:textSize="14dp"
-            android:text="@string/win_tie_loss_edit_text_spacing" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:text="@string/ties_title"
-            android:textSize="17dp"/>
+            <!--We should consider adding hints to the EditText instead of space-->
 
-        <EditText
-            android:id="@+id/ties"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/wins_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/wins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="1234567890"
+                android:inputType="number"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/ties_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/ties"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="1234567890"
+                android:inputType="number"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:text="@string/losses_title"
+                android:textSize="17dp"/>
+
+            <EditText
+                android:id="@+id/losses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="1234567890"
+                android:inputType="number"
+                android:text="@string/win_tie_loss_edit_text_spacing"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+        <!--Type of Robots-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:digits="1234567890"
-            android:textSize="14dp"
-            android:text="@string/win_tie_loss_edit_text_spacing"/>
+            android:paddingBottom="16dp"
+            android:paddingTop="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:text="@string/losses_title"
-            android:textSize="17dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="@string/robot_type_label"
+                android:textSize="17dp"/>
 
-        <EditText
-            android:id="@+id/losses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:digits="1234567890"
-            android:textSize="14dp"
-            android:text="@string/win_tie_loss_edit_text_spacing"/>
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/bright_blue"
+                android:paddingLeft="20dp">
+            </Spinner>
+        </LinearLayout>
 
-    <!--Type of Robots-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/robot_type_label"
-            android:textSize="17dp"
-            android:paddingLeft="20dp" />
-
-        <Spinner
-            android:id="@+id/type_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:backgroundTint="@color/bright_blue">
-        </Spinner>
-    </LinearLayout>
-
-    <!--Hang-->
-    <Button
-        android:id="@+id/hang_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/hang_text" />
-
-    <!-- Can it Throw Cubes?-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cube_checkbox_text"
-            android:textSize="17dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"/>
-
-        <CheckBox
-            android:id="@+id/cubes"
+        <!--Hang-->
+        <Button
+            android:id="@+id/hang_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
-    </LinearLayout>
+            android:layout_marginRight="16dp"
+            android:text="@string/hang_text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp">
-
-        <TextView
-            android:id="@+id/disqualification_text_view"
-            android:layout_width="wrap_content"
+        <!-- Can it Throw Cubes?-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/disquals_title"
-            android:textSize="17dp"
-            android:paddingLeft="20dp"
-            android:layout_gravity="center_vertical"
-            android:paddingRight="22dp"/>
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/add_disquals_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:backgroundTint="@color/bright_blue"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_add_blue"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="@string/cube_checkbox_text"
+                android:textSize="17dp"/>
 
-        <TextView
-            android:id="@+id/total_disquals_text_view"
-            android:layout_width="wrap_content"
+            <CheckBox
+                android:id="@+id/cubes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/disquals_text"
-            android:padding="10dp"/>
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
 
-        <ImageButton
-            android:id="@+id/subtract_disquals_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:backgroundTint="@color/bright_blue"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_remove"/>
+            <TextView
+                android:id="@+id/disqualification_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="22dp"
+                android:text="@string/disquals_title"
+                android:textSize="17dp"/>
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/add_disquals_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/bright_blue"
+                android:src="@drawable/ic_action_add_blue"/>
 
-    <!--Last Date Played-->
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/date_picker_title"
-           android:textSize="17dp"
-           android:paddingLeft="20dp"
-           android:paddingTop="16dp"/>
-       <Button
-            android:id="@+id/last_played_date"
+            <TextView
+                android:id="@+id/total_disquals_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:text="@string/disquals_text"/>
+
+            <ImageButton
+                android:id="@+id/subtract_disquals_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/bright_blue"
+                android:src="@drawable/ic_action_remove"/>
+
+        </LinearLayout>
+
+        <!--Last Date Played-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="16dp"
+                android:text="@string/date_picker_title"
+                android:textSize="17dp"/>
+
+            <Button
+                android:id="@+id/last_played_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+        </LinearLayout>
+
+
+        <!--Choose contact-->
+        <Button
+            android:id="@+id/team_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-   </LinearLayout>
+            android:layout_marginRight="16dp"
+            android:text="@string/team_contact_text"/>
 
+        <Button
+            android:id="@+id/call_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/call_coach_text"/>
 
-    <!--Choose contact-->
-    <Button
-        android:id="@+id/team_contact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/team_contact_text"/>
-
-    <Button
-        android:id="@+id/call_contact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/call_coach_text"/>
-
-    <!--Send report-->
-    <Button
-        android:id="@+id/team_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/send_report_text"/>
+        <!--Send report-->
+        <Button
+            android:id="@+id/team_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/send_report_text"/>
     </LinearLayout>
 
 </ScrollView>

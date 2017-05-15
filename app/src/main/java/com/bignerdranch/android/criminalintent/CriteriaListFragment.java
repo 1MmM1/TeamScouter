@@ -31,7 +31,8 @@ public class CriteriaListFragment extends Fragment{
     private boolean mCriteriaSubtitleVisible;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_criteria_list, container, false);
 
@@ -42,7 +43,8 @@ public class CriteriaListFragment extends Fragment{
 
         if(savedInstanceState != null)
         {
-            mCriteriaSubtitleVisible = savedInstanceState.getBoolean(SAVED_CRITERIA_SUBTITLE_VISIBLE);
+            mCriteriaSubtitleVisible = savedInstanceState
+                    .getBoolean(SAVED_CRITERIA_SUBTITLE_VISIBLE);
         }
 
         updateSubtitle();
@@ -97,7 +99,8 @@ public class CriteriaListFragment extends Fragment{
 
     private void updateSubtitle()
     {
-        String subtitle = getResources().getQuantityString(R.plurals.criteria_subtitle_plural, TeamLab.criteriaList.size(), TeamLab.criteriaList.size());
+        String subtitle = getResources().getQuantityString(R.plurals.criteria_subtitle_plural,
+                TeamLab.criteriaList.size(), TeamLab.criteriaList.size());
 
         if(!mCriteriaSubtitleVisible)
         {
@@ -129,7 +132,8 @@ public class CriteriaListFragment extends Fragment{
         {
 //            mCriteria = criteria;
             mCriteriaName.setText(getString(R.string.criteria_name_text, criteria));
-            mCriteriaType.setText(getString(R.string.criteria_name_text, TeamLab.criteriaList.get(criteria)));
+            mCriteriaType.setText(getString(R.string.criteria_name_text, TeamLab.criteriaList
+                    .get(criteria)));
             if (position % 2 == 1)
                 mCriteriaList.setBackgroundColor(Color.rgb(186, 236, 255));
             else

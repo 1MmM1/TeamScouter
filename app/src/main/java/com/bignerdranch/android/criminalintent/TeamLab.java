@@ -80,7 +80,8 @@ public class TeamLab {
 
     public Team getTeam(UUID id)
     {
-        TeamCursorWrapper cursor = queryTeams(TeamTable.Cols.UUID + " = ?", new String[] { id.toString() });
+        TeamCursorWrapper cursor = queryTeams(TeamTable.Cols.UUID + " = ?",
+                new String[] { id.toString() });
 
         try
         {
@@ -113,7 +114,8 @@ public class TeamLab {
     {
         String uuidString = team.getId().toString();
         ContentValues values = getContentValues(team);
-        mDatabase.update(TeamTable.NAME, values, TeamTable.Cols.UUID + " = ?", new String[]{uuidString});
+        mDatabase.update(TeamTable.NAME, values, TeamTable.Cols.UUID + " = ?",
+                new String[]{uuidString});
     }
 
     public static ContentValues getContentValues(Team team)
@@ -136,7 +138,8 @@ public class TeamLab {
 
     private TeamCursorWrapper queryTeams(String whereClause, String[] whereArgs)
     {
-        Cursor cursor = mDatabase.query(TeamTable.NAME, null, whereClause, whereArgs, null, null, null);
+        Cursor cursor = mDatabase.query(TeamTable.NAME, null, whereClause,
+                whereArgs, null, null, null);
         return(new TeamCursorWrapper(cursor));
     }
 

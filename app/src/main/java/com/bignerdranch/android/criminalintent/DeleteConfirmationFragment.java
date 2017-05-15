@@ -31,18 +31,23 @@ public class DeleteConfirmationFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_delete, null);
 
-        return (new AlertDialog.Builder(getActivity()).setView(v).setTitle(R.string.delete_confirmation_title)
+        return (new AlertDialog.Builder(getActivity()).setView(v)
+                .setTitle(R.string.delete_confirmation_title)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
+                        getTargetFragment()
+                                .onActivityResult(getTargetRequestCode(),
+                                        Activity.RESULT_OK, null);
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_CANCELED, null);
+                        getTargetFragment()
+                                .onActivityResult(getTargetRequestCode(),
+                                        Activity.RESULT_CANCELED, null);
                     }
                 }).create());
     }
